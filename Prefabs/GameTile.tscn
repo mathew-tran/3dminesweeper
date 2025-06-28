@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0n6a6wl5obia"]
+
+[ext_resource type="Script" uid="uid://bjkxdsetn0f2g" path="res://Scripts/GameTile.gd" id="1_fhj7f"]
+[ext_resource type="PackedScene" uid="uid://d0f4rrupdu72k" path="res://Models/Tile/tile.gltf" id="1_g8rft"]
+[ext_resource type="Texture2D" uid="uid://ckgt5tbtc3si" path="res://Sprites/Sword.png" id="2_x34bm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fhj7f"]
+size = Vector3(0.065, 0.016311, 0.065)
+
+[node name="GameTile" type="StaticBody3D"]
+script = ExtResource("1_fhj7f")
+
+[node name="blockbench_export" parent="." instance=ExtResource("1_g8rft")]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="blockbench_export"]
+transform = Transform3D(-0.04, 1.52855e-16, -3.49691e-09, 3.49691e-09, 1.74846e-09, -0.04, 0, -0.04, -1.74846e-09, 8.20986e-10, 0.00939098, 0)
+texture = ExtResource("2_x34bm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00510376, 0)
+shape = SubResource("BoxShape3D_fhj7f")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+
+[editable path="blockbench_export"]

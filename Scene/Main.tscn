@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsuec0fj58hik"]
+
+[ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_xhtwi"]
+[ext_resource type="PackedScene" uid="uid://ck2gjdupm5phg" path="res://Prefabs/Enemy.tscn" id="2_djkur"]
+[ext_resource type="PackedScene" uid="uid://c0pfi81qtcbay" path="res://Models/Playspace/playspace.gltf" id="3_djkur"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="GameTile" parent="." instance=ExtResource("1_xhtwi")]
+
+[node name="GameTile2" parent="." instance=ExtResource("1_xhtwi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0800066, 0, 0)
+
+[node name="GameTile3" parent="." instance=ExtResource("1_xhtwi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1615, 0, 0)
+
+[node name="GameTile4" parent="." instance=ExtResource("1_xhtwi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.244074, 0, 0)
+
+[node name="GameTile5" parent="." instance=ExtResource("1_xhtwi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32033, 0, 0)
+
+[node name="GameTile6" parent="." instance=ExtResource("1_xhtwi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.407409, 0, 0)
+
+[node name="GameTile7" parent="." instance=ExtResource("1_xhtwi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.083941, 0, 0)
+
+[node name="GameTile8" parent="." instance=ExtResource("1_xhtwi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.164508, 0, 0)
+
+[node name="GameTile9" parent="." instance=ExtResource("1_xhtwi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.248258, 0, 0)
+
+[node name="GameTile10" parent="." instance=ExtResource("1_xhtwi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.335956, 0, 0)
+
+[node name="GameTile11" parent="." instance=ExtResource("1_xhtwi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.412254, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="Enemy" parent="." instance=ExtResource("2_djkur")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -0.0106317, 0, -0.837637)
+
+[node name="Playspace" parent="." instance=ExtResource("3_djkur")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.092492, -0.421679)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.298062, 0.247951)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
