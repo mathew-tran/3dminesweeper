@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c6kolmtilbqdq" path="res://Scripts/TileEffect/TileEffect.gd" id="2_o5pps"]
 
 [node name="GameTile" instance=ExtResource("1_4cmnf")]
+TileTitle = "DAMAGE"
 
 [node name="TileEffectDoDamage" type="Node2D" parent="Effects" index="0"]
 script = ExtResource("2_o5pps")

@@ -1,5 +1,7 @@
 extends Node3D
 
+signal MonsterKilled
+
 func _ready() -> void:
 	SpawnMonster()
 	
@@ -10,6 +12,6 @@ func SpawnMonster():
 	instance.OnDeath.connect(OnDeath)
 	
 func OnDeath():
-	SpawnMonster()
+	MonsterKilled.emit()
 	
 	

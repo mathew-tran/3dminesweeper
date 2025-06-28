@@ -1,15 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://bsuec0fj58hik"]
+[gd_scene load_steps=14 format=3 uid="uid://bsuec0fj58hik"]
 
 [ext_resource type="Script" uid="uid://beilse1b132e6" path="res://Scripts/Game.gd" id="1_h175a"]
 [ext_resource type="Resource" uid="uid://b4itrbxtgu4o" path="res://Content/Decks/DeckData_Basic.tres" id="2_hueuk"]
 [ext_resource type="Script" uid="uid://bkay8viogup8w" path="res://Scripts/Components/HealthComponent.gd" id="2_togfq"]
 [ext_resource type="PackedScene" uid="uid://c0pfi81qtcbay" path="res://Models/Playspace/playspace.gltf" id="3_djkur"]
 [ext_resource type="Script" uid="uid://i7gp8a5hbf54" path="res://Scripts/MonsterSpawner.gd" id="3_vm4ek"]
+[ext_resource type="PackedScene" uid="uid://c5c11qqxbqbet" path="res://Prefabs/InfoPopup.tscn" id="6_4qtod"]
 [ext_resource type="PackedScene" uid="uid://uhrdfbyk2mik" path="res://Prefabs/UI/HealthbarUI.tscn" id="6_aan6j"]
 [ext_resource type="Script" uid="uid://dqyg5mns7ccw7" path="res://Scripts/Editor/ToolTileGridContainer.gd" id="7_hueuk"]
 [ext_resource type="PackedScene" uid="uid://x276p6483jes" path="res://Prefabs/TileSlot.tscn" id="8_hueuk"]
 [ext_resource type="PackedScene" uid="uid://c57vx16ukfuxw" path="res://Prefabs/TilePreview.tscn" id="9_6a8me"]
 [ext_resource type="PackedScene" uid="uid://bittp5og84ajb" path="res://Prefabs/GraveyardPreview.tscn" id="9_yg4ot"]
+[ext_resource type="PackedScene" uid="uid://b2ll27us1m10f" path="res://Prefabs/Shop.tscn" id="11_vm4ek"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_h3nmf"]
 viewport_path = NodePath("Sprite3D/SubViewport")
@@ -37,6 +39,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.092492, -0.421679)
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.298062, 0.191825)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InfoPopup" parent="CanvasLayer" instance=ExtResource("6_4qtod")]
+visible = false
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, 0.0707107, 0.0707107, 0, -0.0707107, 0.0707107, -2.81283e-09, -0.0630492, 0.113803)
@@ -90,3 +95,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.392513, -0.0239674, -0.1796
 
 [node name="TilePreview" parent="." instance=ExtResource("9_6a8me")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37548, 0, -0.033076)
+
+[node name="Shop" parent="." instance=ExtResource("11_vm4ek")]
+transform = Transform3D(1, 0, 0, 0, 0.258819, -0.965926, 0, 0.965926, 0.258819, -3.26119, 0.388418, -0.16823)

@@ -41,14 +41,32 @@ func AddTilesIfOpen():
 			DeckUpdate.emit()
 		else:
 			if Deck.size() <= 0:
-				while Graveyard.size() > 0:
-					Deck.push_back(Graveyard.pop_front())
-					await get_tree().create_timer(.01).timeout
-					DeckUpdate.emit()
-				Deck.shuffle()
-				DeckUpdate.emit()
+				PutGraveyardBackToDeck()
+				
+				
+func PutGraveyardBackToDeck():
+	while Graveyard.size() > 0:
+		Deck.push_back(Graveyard.pop_front())
+		await get_tree().create_timer(.01).timeout
+		DeckUpdate.emit()
+	Deck.shuffle()
+	DeckUpdate.emit()
+	
+func PutTilesBack():
+	for tile in $Tiles.get_children():
+		Deck.append(tile.SceneRef)
+		tile.queue_free()
+		
+func AddTileScene(tileScene):
+	Deck.push_back(tileScene)
+	DeckUpdate.emit()
 
+func ShuffleDeck():
+	Deck.shuffle()
+	
 func OnTileFinishedResolving(tileScene):
+	if get_tree() == null:
+		return
 	Graveyard.push_back(tileScene)
 	await get_tree().process_frame
 	AddTilesIfOpen()
@@ -63,9 +81,24 @@ func _ready() -> void:
 		
 	$HealthComponent.OnTakeDamage.connect(OnTakeDamage)
 	$HealthComponent.OnDeath.connect(OnDeath)
-	
+	$Spawner.MonsterKilled.connect(OnMonsterKilled)
 	await AddTilesIfOpen()
 
+func GoBackToGameView():
+	$Camera3D.make_current()
+	
+func OnMonsterKilled():
+	
+	PutTilesBack()
+	await PutGraveyardBackToDeck()
+	$Shop.Setup()
+	
+	ShuffleDeck()
+	await $Shop.ShopComplete
+	GoBackToGameView()
+	$Spawner.SpawnMonster()
+	await AddTilesIfOpen()
+	
 		
 func OnTakeDamage(amount):
 	pass

@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cxme8ni4a2hxu" path="res://Scripts/TileEffect/TileEffectSkipTurn.gd" id="3_xp8qw"]
 
 [node name="GameTile" instance=ExtResource("1_p1p8a")]
+TileTitle = "SKIP"
 
 [node name="Sprite3D" parent="blockbench_export" index="1"]
 texture = ExtResource("2_p1p8a")

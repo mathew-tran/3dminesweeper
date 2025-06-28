@@ -3,6 +3,8 @@ extends TileEffect
 class_name TileEffectDoDamage
 @export var Damage = 3
 
+func GetDescription():
+	return "Deals " + str(Damage) + " damage to the enemy"
 
 func DoAction():
 	var enemy = Finder.GetEnemy()

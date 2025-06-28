@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2ll27us1m10f"]
+
+[ext_resource type="Script" uid="uid://dokd7dv47iv73" path="res://Scripts/Shop.gd" id="1_pu482"]
+[ext_resource type="PackedScene" uid="uid://dn3eh371dddi7" path="res://Models/Shop/Shop.gltf" id="1_wubrc"]
+[ext_resource type="Resource" uid="uid://rfaahonfsri2" path="res://Content/CardPools/CardPoolData_Common.tres" id="2_0y0u7"]
+[ext_resource type="Script" uid="uid://dqyg5mns7ccw7" path="res://Scripts/Editor/ToolTileGridContainer.gd" id="2_pu482"]
+[ext_resource type="PackedScene" uid="uid://x276p6483jes" path="res://Prefabs/TileSlot.tscn" id="3_0y0u7"]
+
+[node name="Shop" type="Node3D"]
+script = ExtResource("1_pu482")
+CardPoolsEasy = ExtResource("2_0y0u7")
+
+[node name="blockbench_export" parent="." instance=ExtResource("1_wubrc")]
+
+[node name="GridContainer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00478539, 0.0653641, 0.0145411)
+visible = false
+script = ExtResource("2_pu482")
+tileSize = Vector3(-0.265, 0, 0.07)
+perRow = 3
+
+[node name="TileSlot2" parent="GridContainer" instance=ExtResource("3_0y0u7")]
+transform = Transform3D(1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, 0.265, 0, 0)
+
+[node name="TileSlot3" parent="GridContainer" instance=ExtResource("3_0y0u7")]
+transform = Transform3D(1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, -1.39698e-09, 0, 0)
+
+[node name="TileSlot4" parent="GridContainer" instance=ExtResource("3_0y0u7")]
+transform = Transform3D(1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, -0.265, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.391635, -0.0401392)
+
+[node name="Tiles" type="Node3D" parent="."]
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, 0.2, 0, -0.2, -8.74228e-09, 0.00668335, 0.155548, -0.120807)
+text = "Pick a tile"

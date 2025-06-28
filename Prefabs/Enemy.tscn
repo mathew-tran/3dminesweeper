@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ck2gjdupm5phg"]
+[gd_scene load_steps=10 format=3 uid="uid://ck2gjdupm5phg"]
 
 [ext_resource type="PackedScene" uid="uid://bw5ko1k371" path="res://Models/Monster1/monster1.gltf" id="1_8k53p"]
 [ext_resource type="Script" uid="uid://cesmw5seg722b" path="res://Scripts/Enemy.gd" id="1_gti1y"]
@@ -19,6 +19,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_yfbri"]
 resource_name = "hit"
@@ -36,9 +48,38 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0.811578, 0, 0), Vector3(0.554578, 0, 0), Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_4fqf7"]
+resource_name = "death"
+length = 1.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.71915, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4fqf7"]
 _data = {
 &"RESET": SubResource("Animation_bftkq"),
+&"death": SubResource("Animation_4fqf7"),
 &"hit": SubResource("Animation_yfbri")
 }
 

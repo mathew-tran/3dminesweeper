@@ -23,4 +23,10 @@ func GetGraveyardPreviewSpot():
 	if result:
 		return result[0]
 	return null
+	
+func GetInfoPopup() -> InfoPopup:
+	var result = get_tree().get_nodes_in_group("InfoPopup")
+	if result:
+		return result[0]
+	return null
 		
