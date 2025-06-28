@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ck2gjdupm5phg"]
+[gd_scene load_steps=9 format=3 uid="uid://ck2gjdupm5phg"]
 
 [ext_resource type="PackedScene" uid="uid://bw5ko1k371" path="res://Models/Monster1/monster1.gltf" id="1_8k53p"]
 [ext_resource type="Script" uid="uid://cesmw5seg722b" path="res://Scripts/Enemy.gd" id="1_gti1y"]
 [ext_resource type="Script" uid="uid://bkay8viogup8w" path="res://Scripts/Components/HealthComponent.gd" id="3_yfbri"]
+[ext_resource type="PackedScene" uid="uid://uhrdfbyk2mik" path="res://Prefabs/UI/HealthbarUI.tscn" id="4_bftkq"]
 
 [sub_resource type="Animation" id="Animation_yfbri"]
 resource_name = "hit"
@@ -41,7 +42,7 @@ _data = {
 &"hit": SubResource("Animation_yfbri")
 }
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_yfbri"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_bftkq"]
 viewport_path = NodePath("Sprite3D/SubViewport")
 
 [node name="Enemy" type="Node3D" groups=["Enemy"]]
@@ -59,21 +60,11 @@ libraries = {
 }
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.20538e-09, 0, 0.0595426)
-texture = SubResource("ViewportTexture_yfbri")
+transform = Transform3D(-0.2, 0, -3.01992e-08, 0, 0.2, 0, 3.01992e-08, 0, -0.2, -2.81283e-09, 0.115281, 0.032175)
+texture = SubResource("ViewportTexture_bftkq")
 
 [node name="SubViewport" type="SubViewport" parent="Sprite3D"]
-size = Vector2i(128, 128)
+size = Vector2i(100, 50)
 
-[node name="Panel" type="Panel" parent="Sprite3D/SubViewport"]
-custom_minimum_size = Vector2(128, 128)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ProgressBar" type="ProgressBar" parent="Sprite3D/SubViewport/Panel"]
-layout_mode = 0
-offset_right = 4.0
-offset_bottom = 27.0
+[node name="ProgressBar" parent="Sprite3D/SubViewport" node_paths=PackedStringArray("HealthComponentRef") instance=ExtResource("4_bftkq")]
+HealthComponentRef = NodePath("../../../HealthComponent")

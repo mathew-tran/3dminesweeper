@@ -1,16 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsuec0fj58hik"]
+[gd_scene load_steps=8 format=3 uid="uid://bsuec0fj58hik"]
 
 [ext_resource type="Script" uid="uid://beilse1b132e6" path="res://Scripts/Game.gd" id="1_h175a"]
 [ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_xhtwi"]
 [ext_resource type="PackedScene" uid="uid://ck2gjdupm5phg" path="res://Prefabs/Enemy.tscn" id="2_djkur"]
 [ext_resource type="Script" uid="uid://bkay8viogup8w" path="res://Scripts/Components/HealthComponent.gd" id="2_togfq"]
 [ext_resource type="PackedScene" uid="uid://c0pfi81qtcbay" path="res://Models/Playspace/playspace.gltf" id="3_djkur"]
+[ext_resource type="PackedScene" uid="uid://uhrdfbyk2mik" path="res://Prefabs/UI/HealthbarUI.tscn" id="6_aan6j"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_h3nmf"]
+viewport_path = NodePath("Sprite3D/SubViewport")
 
 [node name="Game" type="Node3D" groups=["Game"]]
 script = ExtResource("1_h175a")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_togfq")
+MaxHealth = 55
 
 [node name="GameTile" parent="." instance=ExtResource("1_xhtwi")]
 
@@ -57,3 +62,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.092492, -0.421679)
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.298062, 0.247951)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.141421, 0.141421, 0, -0.141421, 0.141421, -2.81283e-09, -0.0630492, 0.113803)
+texture = SubResource("ViewportTexture_h3nmf")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+size = Vector2i(100, 50)
+
+[node name="ProgressBar" parent="Sprite3D/SubViewport" node_paths=PackedStringArray("HealthComponentRef") instance=ExtResource("6_aan6j")]
+HealthComponentRef = NodePath("../../../HealthComponent")
