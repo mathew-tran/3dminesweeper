@@ -29,3 +29,11 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 		await tween.finished
 		Finder.GetGame().PlayTile()
 		queue_free()
+
+
+func _on_mouse_entered() -> void:
+	$blockbench_export/Node/cuboid.material_override = load("res://Shaders/GameTileHighlight.tres")
+
+
+func _on_mouse_exited() -> void:
+	$blockbench_export/Node/cuboid.material_override = null

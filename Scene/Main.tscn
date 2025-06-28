@@ -32,7 +32,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.2, 0, 0, 0, 0.141421, 0.141421, 0, -0.141421, 0.141421, -2.81283e-09, -0.0630492, 0.113803)
+transform = Transform3D(0.1, 0, 0, 0, 0.0707107, 0.0707107, 0, -0.0707107, 0.0707107, -2.81283e-09, -0.0630492, 0.113803)
 texture = SubResource("ViewportTexture_h3nmf")
 
 [node name="SubViewport" type="SubViewport" parent="Sprite3D"]
