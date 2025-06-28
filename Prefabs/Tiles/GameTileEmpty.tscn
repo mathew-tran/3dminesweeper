@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7cli5fsp4d76"]
+
+[ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_13g1t"]
+[ext_resource type="Texture2D" uid="uid://dqbwyhrg6y40" path="res://Sprites/Nothing.png" id="2_ima83"]
+
+[node name="GameTile" instance=ExtResource("1_13g1t")]
+
+[node name="Sprite3D" parent="blockbench_export" index="1"]
+texture = ExtResource("2_ima83")
+
+[editable path="blockbench_export"]

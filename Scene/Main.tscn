@@ -1,18 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsuec0fj58hik"]
+[gd_scene load_steps=10 format=3 uid="uid://bsuec0fj58hik"]
 
 [ext_resource type="Script" uid="uid://beilse1b132e6" path="res://Scripts/Game.gd" id="1_h175a"]
 [ext_resource type="PackedScene" uid="uid://ck2gjdupm5phg" path="res://Prefabs/Enemy.tscn" id="2_djkur"]
+[ext_resource type="Resource" uid="uid://b4itrbxtgu4o" path="res://Content/Decks/DeckData_Basic.tres" id="2_hueuk"]
 [ext_resource type="Script" uid="uid://bkay8viogup8w" path="res://Scripts/Components/HealthComponent.gd" id="2_togfq"]
 [ext_resource type="PackedScene" uid="uid://c0pfi81qtcbay" path="res://Models/Playspace/playspace.gltf" id="3_djkur"]
 [ext_resource type="PackedScene" uid="uid://uhrdfbyk2mik" path="res://Prefabs/UI/HealthbarUI.tscn" id="6_aan6j"]
 [ext_resource type="Script" uid="uid://dqyg5mns7ccw7" path="res://Scripts/Editor/ToolTileGridContainer.gd" id="7_hueuk"]
-[ext_resource type="PackedScene" uid="uid://d0f4rrupdu72k" path="res://Models/Tile/tile.gltf" id="8_6a8me"]
+[ext_resource type="PackedScene" uid="uid://x276p6483jes" path="res://Prefabs/TileSlot.tscn" id="8_hueuk"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_h3nmf"]
 viewport_path = NodePath("Sprite3D/SubViewport")
 
 [node name="Game" type="Node3D" groups=["Game"]]
 script = ExtResource("1_h175a")
+DeckRef = ExtResource("2_hueuk")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_togfq")
@@ -27,7 +29,7 @@ transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -0.010
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.092492, -0.421679)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.298062, 0.247951)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.298062, 0.191825)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -42,68 +44,38 @@ size = Vector2i(100, 50)
 HealthComponentRef = NodePath("../../../HealthComponent")
 
 [node name="TileGridContainer" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0906154)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -0.114819)
 script = ExtResource("7_hueuk")
-tileSize = Vector3(0.085, 0, 0.085)
+tileSize = Vector3(0.095, 0, 0.095)
 
-[node name="blockbench_export" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17, 0, -0.1275)
+[node name="TileSlot2" parent="TileGridContainer" instance=ExtResource("8_hueuk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19, 0, 0.0475)
 
-[node name="blockbench_export2" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.085, 0, -0.1275)
+[node name="TileSlot3" parent="TileGridContainer" instance=ExtResource("8_hueuk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.095, 0, 0.0475)
 
-[node name="blockbench_export13" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1275)
+[node name="TileSlot4" parent="TileGridContainer" instance=ExtResource("8_hueuk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.15258e-09, 0, 0.0475)
 
-[node name="blockbench_export14" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.085, 0, -0.1275)
+[node name="TileSlot5" parent="TileGridContainer" instance=ExtResource("8_hueuk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.095, 0, 0.0475)
 
-[node name="blockbench_export15" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17, 0, -0.1275)
+[node name="TileSlot6" parent="TileGridContainer" instance=ExtResource("8_hueuk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19, 0, 0.0475)
 
-[node name="blockbench_export17" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17, 0, -0.0425)
+[node name="TileSlot7" parent="TileGridContainer" instance=ExtResource("8_hueuk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19, 0, -0.0475)
 
-[node name="blockbench_export18" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.085, 0, -0.0425)
+[node name="TileSlot8" parent="TileGridContainer" instance=ExtResource("8_hueuk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.095, 0, -0.0475)
 
-[node name="blockbench_export19" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0425)
+[node name="TileSlot9" parent="TileGridContainer" instance=ExtResource("8_hueuk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.15258e-09, 0, -0.0475)
 
-[node name="blockbench_export20" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.085, 0, -0.0425)
+[node name="TileSlot10" parent="TileGridContainer" instance=ExtResource("8_hueuk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.095, 0, -0.0475)
 
-[node name="blockbench_export21" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17, 0, -0.0425)
-
-[node name="blockbench_export22" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17, 0, 0.0425)
-
-[node name="blockbench_export23" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.085, 0, 0.0425)
-
-[node name="blockbench_export24" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0425)
-
-[node name="blockbench_export25" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.085, 0, 0.0425)
-
-[node name="blockbench_export26" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17, 0, 0.0425)
-
-[node name="blockbench_export27" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17, 0, 0.1275)
-
-[node name="blockbench_export28" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.085, 0, 0.1275)
-
-[node name="blockbench_export31" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1275)
-
-[node name="blockbench_export29" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.085, 0, 0.1275)
-
-[node name="blockbench_export30" parent="TileGridContainer" instance=ExtResource("8_6a8me")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17, 0, 0.1275)
+[node name="TileSlot11" parent="TileGridContainer" instance=ExtResource("8_hueuk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19, 0, -0.0475)
 
 [node name="Tiles" type="Node3D" parent="." groups=["Tiles"]]

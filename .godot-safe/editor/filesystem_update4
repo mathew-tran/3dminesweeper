@@ -1,0 +1,7 @@
+res://Prefabs/Tiles/GameTileEmpty.tscn
+res://Content/Decks/DeckData_Basic.tres
+res://Shaders/Highlight.gdshader
+res://Prefabs/Tiles/GameTileDealDamage.tscn
+res://Prefabs/Tiles/GameTileRedo.tscn
+res://Prefabs/TileSlot.tscn
+res://Scene/Main.tscn

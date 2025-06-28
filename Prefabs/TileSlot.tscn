@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://x276p6483jes"]
+
+[ext_resource type="PackedScene" uid="uid://d0f4rrupdu72k" path="res://Models/Tile/tile.gltf" id="1_3287i"]
+[ext_resource type="Script" uid="uid://c8xc3d8lx85tw" path="res://Scripts/TileSlot.gd" id="1_yf1h6"]
+
+[node name="TileSlot" type="Node3D"]
+script = ExtResource("1_yf1h6")
+
+[node name="blockbench_export30" parent="." instance=ExtResource("1_3287i")]

@@ -6,22 +6,24 @@ var StartPosition = Vector3.ZERO
 @export var tileSize = Vector3(.23,0,.07)
 @export var perRow = 5
 
+func _ready() -> void:
+	StartPosition = global_position
+	Update()
+	
 func GetPositions():
 	var positions = []
 	for child in get_children():
 		positions.append(child.global_position)
 	return positions
 	
-func _ready() -> void:
-	if Engine.is_editor_hint():
-		Update()
-	
-func _process(delta: float) -> void:
-	if Engine.is_editor_hint():
-		StartPosition = global_position
-		Update()
+func GetNextOpenPosition():
+	for child in get_children():
+		if child.IsAvailable():
+			return child
+	return null
+
 		
-func Update():
+func Update():	
 	var amount = get_child_count()
 	var index = 0
 	var vIndex = 0

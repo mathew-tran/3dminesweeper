@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba05t00ol2um6"]
+
+[ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_4cmnf"]
+[ext_resource type="Script" uid="uid://c6kolmtilbqdq" path="res://Scripts/TileEffect/TileEffect.gd" id="2_o5pps"]
+
+[node name="GameTile" instance=ExtResource("1_4cmnf")]
+
+[node name="TileEffectDoDamage" type="Node2D" parent="Effects" index="0"]
+script = ExtResource("2_o5pps")
+metadata/_custom_type_script = "uid://c6kolmtilbqdq"
+
+[editable path="blockbench_export"]
