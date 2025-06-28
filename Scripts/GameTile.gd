@@ -28,3 +28,4 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 		tween.tween_property($blockbench_export, "global_position", originalPosition, .2)
 		await tween.finished
 		Finder.GetGame().PlayTile()
+		queue_free()
