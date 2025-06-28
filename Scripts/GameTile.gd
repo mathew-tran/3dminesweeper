@@ -32,11 +32,13 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 		tween.tween_property($blockbench_export, "global_position", originalPosition, .1)
 		await tween.finished
 		await get_tree().create_timer(.1).timeout
-		Finder.GetGame().PlayTile()
+		
 		tween = get_tree().create_tween()
 		tween.tween_property(self, "global_position", Finder.GetGraveyardPreviewSpot().global_position, .1)
 		await tween.finished
+		
 		TileFinishedResolving.emit(SceneRef)
+		Finder.GetGame().PlayTile()
 		queue_free()
 
 func DoAction():

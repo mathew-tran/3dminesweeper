@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://bsuec0fj58hik"]
 
 [ext_resource type="Script" uid="uid://beilse1b132e6" path="res://Scripts/Game.gd" id="1_h175a"]
-[ext_resource type="PackedScene" uid="uid://ck2gjdupm5phg" path="res://Prefabs/Enemy.tscn" id="2_djkur"]
 [ext_resource type="Resource" uid="uid://b4itrbxtgu4o" path="res://Content/Decks/DeckData_Basic.tres" id="2_hueuk"]
 [ext_resource type="Script" uid="uid://bkay8viogup8w" path="res://Scripts/Components/HealthComponent.gd" id="2_togfq"]
 [ext_resource type="PackedScene" uid="uid://c0pfi81qtcbay" path="res://Models/Playspace/playspace.gltf" id="3_djkur"]
+[ext_resource type="Script" uid="uid://i7gp8a5hbf54" path="res://Scripts/MonsterSpawner.gd" id="3_vm4ek"]
 [ext_resource type="PackedScene" uid="uid://uhrdfbyk2mik" path="res://Prefabs/UI/HealthbarUI.tscn" id="6_aan6j"]
 [ext_resource type="Script" uid="uid://dqyg5mns7ccw7" path="res://Scripts/Editor/ToolTileGridContainer.gd" id="7_hueuk"]
 [ext_resource type="PackedScene" uid="uid://x276p6483jes" path="res://Prefabs/TileSlot.tscn" id="8_hueuk"]
@@ -18,14 +18,17 @@ viewport_path = NodePath("Sprite3D/SubViewport")
 script = ExtResource("1_h175a")
 DeckRef = ExtResource("2_hueuk")
 
+[node name="Spawner" type="Node3D" parent="."]
+script = ExtResource("3_vm4ek")
+
+[node name="MonsterPosition" type="Node3D" parent="Spawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0106317, 0, -0.837637)
+
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_togfq")
 MaxHealth = 55
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-
-[node name="Enemy" parent="." instance=ExtResource("2_djkur")]
-transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -0.0106317, 0, -0.837637)
 
 [node name="Playspace" parent="." instance=ExtResource("3_djkur")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.092492, -0.421679)

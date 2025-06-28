@@ -2,16 +2,19 @@ extends Node3D
 
 class_name Enemy
 
+signal OnDeath
+
 func _ready() -> void:
 	$HealthComponent.OnTakeDamage.connect(OnTakeDamage)
-	$HealthComponent.OnDeath.connect(OnDeath)	
+	$HealthComponent.OnDeath.connect(OnEnemyDeath)	
 	Finder.GetGame().PlayerPlayedTile.connect(OnPlayerPlayedTile)
 	
 func OnTakeDamage(amount):
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("hit")
 	
-func OnDeath():
+func OnEnemyDeath():
+	OnDeath.emit()
 	queue_free()
 
 func TakeDamage(amount):
