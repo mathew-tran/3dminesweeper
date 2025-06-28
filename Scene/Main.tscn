@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bsuec0fj58hik"]
+[gd_scene load_steps=12 format=3 uid="uid://bsuec0fj58hik"]
 
 [ext_resource type="Script" uid="uid://beilse1b132e6" path="res://Scripts/Game.gd" id="1_h175a"]
 [ext_resource type="PackedScene" uid="uid://ck2gjdupm5phg" path="res://Prefabs/Enemy.tscn" id="2_djkur"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://uhrdfbyk2mik" path="res://Prefabs/UI/HealthbarUI.tscn" id="6_aan6j"]
 [ext_resource type="Script" uid="uid://dqyg5mns7ccw7" path="res://Scripts/Editor/ToolTileGridContainer.gd" id="7_hueuk"]
 [ext_resource type="PackedScene" uid="uid://x276p6483jes" path="res://Prefabs/TileSlot.tscn" id="8_hueuk"]
+[ext_resource type="PackedScene" uid="uid://c57vx16ukfuxw" path="res://Prefabs/TilePreview.tscn" id="9_6a8me"]
+[ext_resource type="PackedScene" uid="uid://bittp5og84ajb" path="res://Prefabs/GraveyardPreview.tscn" id="9_yg4ot"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_h3nmf"]
 viewport_path = NodePath("Sprite3D/SubViewport")
@@ -79,3 +81,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.095, 0, -0.0475)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19, 0, -0.0475)
 
 [node name="Tiles" type="Node3D" parent="." groups=["Tiles"]]
+
+[node name="GraveyardPreview" parent="." instance=ExtResource("9_yg4ot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.392513, -0.0239674, -0.179605)
+
+[node name="TilePreview" parent="." instance=ExtResource("9_6a8me")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37548, 0, -0.033076)

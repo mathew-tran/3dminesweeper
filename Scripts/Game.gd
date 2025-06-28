@@ -5,8 +5,10 @@ class_name Game
 @export var DeckRef : DeckData
 
 signal PlayerPlayedTile
+signal DeckUpdate
 
 var Deck = []
+var Graveyard = []
 var Skips = 0
 
 var LivingTiles = []
@@ -26,27 +28,39 @@ func AddTilesIfOpen():
 			var tile = Deck.pop_front()
 			var instance = tile.instantiate()
 			instance.SceneRef = tile
+			instance.global_position = Finder.GetTilePreviewSpot().global_position
 			$Tiles.add_child(instance)
 			var nextTileSlot = $TileGridContainer.GetNextOpenPosition()
 			if nextTileSlot: 
-				nextTileSlot.Occupy(instance)
-			instance.TileFinishedResolving.connect(OnTileFinishedResolving)
+				await nextTileSlot.Occupy(instance)
+				instance.TileFinishedResolving.connect(OnTileFinishedResolving)
+			else:
+				print("No tile slot to fill! This is a big issue!")
 			await get_tree().process_frame
+			await get_tree().create_timer(.01).timeout
+			DeckUpdate.emit()
 		else:
-			print("game should be over, or we should add tiles back into the deck")
-			break
+			if Deck.size() <= 0:
+				while Graveyard.size() > 0:
+					Deck.push_back(Graveyard.pop_front())
+					await get_tree().create_timer(.01).timeout
+					DeckUpdate.emit()
+				Deck.shuffle()
+				DeckUpdate.emit()
 
 func OnTileFinishedResolving(tileScene):
-	Deck.push_back(tileScene)
+	Graveyard.push_back(tileScene)
 	await get_tree().process_frame
 	AddTilesIfOpen()
+	DeckUpdate.emit()
 	
 func _ready() -> void:
 	#$TileGridContainer.Update(TileAmount)
 	
 	DeckRef.CreateDeck()
 	Deck.shuffle()
-	$TileGridContainer.visible = false
+
+		
 	$HealthComponent.OnTakeDamage.connect(OnTakeDamage)
 	$HealthComponent.OnDeath.connect(OnDeath)
 	

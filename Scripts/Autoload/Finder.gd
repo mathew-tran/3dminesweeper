@@ -11,3 +11,16 @@ func GetEnemy() -> Enemy:
 	if result:
 		return result[0]
 	return null
+
+func GetTilePreviewSpot():
+	var result = get_tree().get_nodes_in_group("TilePreview")
+	if result:
+		return result[0]
+	return null
+	
+func GetGraveyardPreviewSpot():
+	var result = get_tree().get_nodes_in_group("GraveyardPreview")
+	if result:
+		return result[0]
+	return null
+		

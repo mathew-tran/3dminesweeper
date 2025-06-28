@@ -9,8 +9,11 @@ func IsAvailable():
 	
 func Occupy(tile : GameTile):
 	TileRef = tile
-	tile.global_position = global_position
-	tile.TileFinishedResolving.connect(OnTileFinishedResolving)
+	var tween = get_tree().create_tween()
+	tween.tween_property(tile, "global_position",global_position + Vector3(0, .025, 0), .1 )
 	
-func OnTileFinishedResolving():
+	tile.TileFinishedResolving.connect(OnTileFinishedResolving)
+	await tween.finished
+	
+func OnTileFinishedResolving(tile):
 	TileRef = null

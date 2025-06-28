@@ -3,6 +3,7 @@ extends StaticBody3D
 class_name GameTile
 
 enum TILE_STATE {
+	UNCLICKABLE,
 	UNFLIPPED,
 	FLIPPED
 }
@@ -13,7 +14,7 @@ var CurrentState = TILE_STATE.UNFLIPPED
 var SceneRef : PackedScene
 
 func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
-	if CurrentState == TILE_STATE.FLIPPED:
+	if CurrentState == TILE_STATE.FLIPPED or CurrentState == TILE_STATE.UNCLICKABLE:
 		return
 	if event.is_action_pressed("left_click"):
 		print(name + " clicked")
@@ -28,9 +29,13 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 		
 		await tween.finished
 		tween = get_tree().create_tween()
-		tween.tween_property($blockbench_export, "global_position", originalPosition, .2)
+		tween.tween_property($blockbench_export, "global_position", originalPosition, .1)
 		await tween.finished
+		await get_tree().create_timer(.1).timeout
 		Finder.GetGame().PlayTile()
+		tween = get_tree().create_tween()
+		tween.tween_property(self, "global_position", Finder.GetGraveyardPreviewSpot().global_position, .1)
+		await tween.finished
 		TileFinishedResolving.emit(SceneRef)
 		queue_free()
 
@@ -38,8 +43,10 @@ func DoAction():
 	pass
 	
 func _on_mouse_entered() -> void:
-	$blockbench_export/Node/cuboid.material_override = load("res://Shaders/GameTileHighlight.tres")
+	if CurrentState != TILE_STATE.UNCLICKABLE:
+		$blockbench_export/Node/cuboid.material_override = load("res://Shaders/GameTileHighlight.tres")
 
 
 func _on_mouse_exited() -> void:
-	$blockbench_export/Node/cuboid.material_override = null
+	if CurrentState != TILE_STATE.UNCLICKABLE:
+		$blockbench_export/Node/cuboid.material_override = null

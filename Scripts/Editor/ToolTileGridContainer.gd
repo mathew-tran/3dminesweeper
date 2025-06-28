@@ -37,8 +37,9 @@ func Update():
 	for x in get_children():
 		x.global_position = StartPosition - offset
 		var xOffset = tileSize.x * index
+		var zOffset = tileSize.y * index
 		var yOffset = tileSize.z * vIndex
-		x.global_position += Vector3(xOffset, 0, yOffset)
+		x.global_position += Vector3(xOffset, zOffset, yOffset)
 		
 		index += 1
 		if index >= perRow:
