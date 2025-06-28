@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsuec0fj58hik"]
+[gd_scene load_steps=6 format=3 uid="uid://bsuec0fj58hik"]
 
+[ext_resource type="Script" uid="uid://beilse1b132e6" path="res://Scripts/Game.gd" id="1_h175a"]
 [ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_xhtwi"]
 [ext_resource type="PackedScene" uid="uid://ck2gjdupm5phg" path="res://Prefabs/Enemy.tscn" id="2_djkur"]
+[ext_resource type="Script" uid="uid://bkay8viogup8w" path="res://Scripts/Components/HealthComponent.gd" id="2_togfq"]
 [ext_resource type="PackedScene" uid="uid://c0pfi81qtcbay" path="res://Models/Playspace/playspace.gltf" id="3_djkur"]
 
-[node name="Node3D" type="Node3D"]
+[node name="Game" type="Node3D" groups=["Game"]]
+script = ExtResource("1_h175a")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_togfq")
 
 [node name="GameTile" parent="." instance=ExtResource("1_xhtwi")]
 
@@ -34,6 +40,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.248258, 0, 0)
 
 [node name="GameTile10" parent="." instance=ExtResource("1_xhtwi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.335956, 0, 0)
+Damage = 10
 
 [node name="GameTile11" parent="." instance=ExtResource("1_xhtwi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.412254, 0, 0)

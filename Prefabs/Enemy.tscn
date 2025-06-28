@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ck2gjdupm5phg"]
+[gd_scene load_steps=8 format=3 uid="uid://ck2gjdupm5phg"]
 
 [ext_resource type="PackedScene" uid="uid://bw5ko1k371" path="res://Models/Monster1/monster1.gltf" id="1_8k53p"]
 [ext_resource type="Script" uid="uid://cesmw5seg722b" path="res://Scripts/Enemy.gd" id="1_gti1y"]
@@ -41,6 +41,9 @@ _data = {
 &"hit": SubResource("Animation_yfbri")
 }
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_yfbri"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
 [node name="Enemy" type="Node3D" groups=["Enemy"]]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_gti1y")
@@ -54,3 +57,23 @@ script = ExtResource("3_yfbri")
 libraries = {
 &"": SubResource("AnimationLibrary_4fqf7")
 }
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.20538e-09, 0, 0.0595426)
+texture = SubResource("ViewportTexture_yfbri")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+size = Vector2i(128, 128)
+
+[node name="Panel" type="Panel" parent="Sprite3D/SubViewport"]
+custom_minimum_size = Vector2(128, 128)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="Sprite3D/SubViewport/Panel"]
+layout_mode = 0
+offset_right = 4.0
+offset_bottom = 27.0
