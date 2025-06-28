@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bsuec0fj58hik"]
+[gd_scene load_steps=19 format=3 uid="uid://bsuec0fj58hik"]
 
 [ext_resource type="Script" uid="uid://beilse1b132e6" path="res://Scripts/Game.gd" id="1_h175a"]
 [ext_resource type="Resource" uid="uid://b4itrbxtgu4o" path="res://Content/Decks/DeckData_Basic.tres" id="2_hueuk"]
@@ -12,9 +12,17 @@
 [ext_resource type="PackedScene" uid="uid://c57vx16ukfuxw" path="res://Prefabs/TilePreview.tscn" id="9_6a8me"]
 [ext_resource type="PackedScene" uid="uid://bittp5og84ajb" path="res://Prefabs/GraveyardPreview.tscn" id="9_yg4ot"]
 [ext_resource type="PackedScene" uid="uid://b2ll27us1m10f" path="res://Prefabs/Shop.tscn" id="11_vm4ek"]
+[ext_resource type="PackedScene" uid="uid://csbhkixkap311" path="res://Models/Bush/bush.gltf" id="13_i0sg4"]
+[ext_resource type="PackedScene" uid="uid://dkngx666s3mjm" path="res://Models/Rock/rock.gltf" id="14_mr7am"]
+[ext_resource type="PackedScene" uid="uid://cqyn38qhexvbi" path="res://Models/grass/grass.gltf" id="15_sc4dx"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_h3nmf"]
 viewport_path = NodePath("Sprite3D/SubViewport")
+
+[sub_resource type="BoxMesh" id="BoxMesh_i0sg4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mr7am"]
+albedo_color = Color(0.0923971, 0.0923971, 0.0923971, 1)
 
 [node name="Game" type="Node3D" groups=["Game"]]
 script = ExtResource("1_h175a")
@@ -98,3 +106,92 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37548, 0, -0.033076)
 
 [node name="Shop" parent="." instance=ExtResource("11_vm4ek")]
 transform = Transform3D(1, 0, 0, 0, 0.258819, -0.965926, 0, 0.965926, 0.258819, -3.26119, 0.388418, -0.16823)
+
+[node name="blockbench_export" parent="." instance=ExtResource("13_i0sg4")]
+transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, -0.392782, 0, -0.753239)
+
+[node name="blockbench_export2" parent="." instance=ExtResource("13_i0sg4")]
+transform = Transform3D(1.49012e-07, 0, 1, 0, 1, 0, -1, 0, 1.49012e-07, 0.386867, -0.0380986, -0.753239)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -0.707218, 0)
+mesh = SubResource("BoxMesh_i0sg4")
+material = SubResource("StandardMaterial3D_mr7am")
+
+[node name="blockbench_export3" parent="." instance=ExtResource("14_mr7am")]
+transform = Transform3D(0.361395, 0, 0, 0, 0.361395, 0, 0, 0, 0.361395, 0.33617, -0.0358617, -0.505403)
+
+[node name="blockbench_export8" parent="." instance=ExtResource("14_mr7am")]
+transform = Transform3D(-0.00176214, 0, -0.361392, -0.412805, 0.185261, 0.00113728, 0.246462, 0.310298, -0.000679004, -0.175555, -0.0419021, -0.804708)
+
+[node name="blockbench_export9" parent="." instance=ExtResource("14_mr7am")]
+transform = Transform3D(-0.431456, 0.0282892, -0.156926, 0.0418528, 0.360023, -0.000115305, 0.207963, -0.013764, -0.325547, 0.249145, -0.0419021, -0.804708)
+
+[node name="blockbench_export10" parent="." instance=ExtResource("14_mr7am")]
+transform = Transform3D(-0.157558, 0.0128042, -0.126003, -0.0585238, 0.0857945, 0.227341, 0.0507536, 0.138678, -0.129013, 0.249145, -0.0202877, -0.804708)
+
+[node name="blockbench_export4" parent="." instance=ExtResource("14_mr7am")]
+transform = Transform3D(0.158279, 0, 0.131789, 0, 0.205962, 0, -0.131789, 0, 0.158279, 0.303159, -0.0358617, -0.505403)
+
+[node name="blockbench_export14" parent="." instance=ExtResource("14_mr7am")]
+transform = Transform3D(0.0441045, 0, 0.201185, 0, 0.205962, 0, -0.201185, 0, 0.0441045, -0.198328, -0.0358617, -0.349982)
+
+[node name="blockbench_export15" parent="." instance=ExtResource("14_mr7am")]
+transform = Transform3D(0.0907608, 0, 0.414009, 0, 0.423841, 0, -0.414009, 0, 0.0907608, -0.00245059, -0.0358617, -0.517839)
+
+[node name="blockbench_export16" parent="." instance=ExtResource("14_mr7am")]
+transform = Transform3D(0.0496349, 0, 0.226412, 0, 0.231788, 0, -0.226412, 0, 0.0496349, 0.207538, -0.0358617, 0.0187923)
+
+[node name="blockbench_export17" parent="." instance=ExtResource("14_mr7am")]
+transform = Transform3D(0.116992, 0, -1.02962, 0, 0.282056, 0, -0.533662, 0, -0.225717, -0.13502, -0.0358617, 0.0187923)
+
+[node name="blockbench_export11" parent="." instance=ExtResource("14_mr7am")]
+transform = Transform3D(-0.810367, 0, 0.678077, 0, 0.733415, 0, 0.674741, 0, 0.814373, 0.495661, -0.0358617, 0.0551119)
+
+[node name="blockbench_export5" parent="." instance=ExtResource("14_mr7am")]
+transform = Transform3D(0.183713, 0, 0.149422, 0.0562909, 0.19151, -0.0660391, -0.142233, 0.0757931, 0.166864, 0.448189, -0.0358617, -0.242648)
+
+[node name="blockbench_export6" parent="." instance=ExtResource("14_mr7am")]
+transform = Transform3D(-0.088802, 0.135449, 0.790427, 0.123749, 0.386668, -0.240293, -0.502987, 0.0712177, -0.198668, -0.404903, -0.0358617, -0.242648)
+
+[node name="blockbench_export12" parent="." instance=ExtResource("14_mr7am")]
+transform = Transform3D(0.497836, -0.118365, -0.125014, 0.123749, 0.386668, -0.240293, 0.114199, 0.0969946, 0.805366, -0.404903, -0.0358617, -0.00447468)
+
+[node name="blockbench_export13" parent="." instance=ExtResource("14_mr7am")]
+transform = Transform3D(0.419693, -0.156107, 0.399751, 0.163553, 0.385326, 0.179368, -0.270747, -0.00921811, 0.728018, -0.460336, -0.0423117, -0.00447468)
+
+[node name="blockbench_export7" parent="." instance=ExtResource("14_mr7am")]
+transform = Transform3D(-0.461263, 0.047931, -0.229877, 0.103124, 0.359217, -0.228204, 0.115109, -0.129748, -0.716718, -0.404903, -0.0475759, -0.209479)
+
+[node name="blockbench_export18" parent="." instance=ExtResource("15_sc4dx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.249427, -0.109761, -0.289966)
+
+[node name="blockbench_export19" parent="." instance=ExtResource("15_sc4dx")]
+transform = Transform3D(0.999873, 0, 0.0159691, 0, 1, 0, -0.0159691, 0, 0.999873, -0.228744, -0.109761, -0.315268)
+
+[node name="blockbench_export20" parent="." instance=ExtResource("15_sc4dx")]
+transform = Transform3D(0.999873, 0, 0.0159691, 0, 1, 0, -0.0159691, 0, 0.999873, 0.273918, -0.132944, -0.27144)
+
+[node name="blockbench_export21" parent="." instance=ExtResource("15_sc4dx")]
+transform = Transform3D(0.999873, 0, 0.0159691, 0, 1, 0, -0.0159691, 0, 0.999873, 0.226166, -0.132944, -0.27144)
+
+[node name="blockbench_export22" parent="." instance=ExtResource("15_sc4dx")]
+transform = Transform3D(0.999873, 0, 0.0159691, 0, 1, 0, -0.0159691, 0, 0.999873, 0.253425, -0.132944, -0.274051)
+
+[node name="blockbench_export23" parent="." instance=ExtResource("15_sc4dx")]
+transform = Transform3D(0.972901, 0, -0.368535, 0, 1, 0, 0.394995, 0, 0.907729, 0.253425, -0.132944, -0.974455)
+
+[node name="blockbench_export24" parent="." instance=ExtResource("15_sc4dx")]
+transform = Transform3D(0.972901, 0, -0.368535, 0, 1, 0, 0.394995, 0, 0.907729, 0.467654, -0.132944, -0.237736)
+
+[node name="blockbench_export25" parent="." instance=ExtResource("15_sc4dx")]
+transform = Transform3D(0.972901, 0, -0.368535, 0, 1, 0, 0.394995, 0, 0.907729, 0.281485, -0.0976847, -0.81561)
+
+[node name="blockbench_export26" parent="." instance=ExtResource("15_sc4dx")]
+transform = Transform3D(0.897937, 0, 0.507842, 0, 1, 0, -0.544303, 0, 0.837787, -0.370615, -0.0976847, -0.640089)
+
+[node name="blockbench_export27" parent="." instance=ExtResource("15_sc4dx")]
+transform = Transform3D(0.897937, 0, 0.507842, 0, 1, 0, -0.544303, 0, 0.837787, -0.388999, -0.0976847, -0.622334)
+
+[node name="blockbench_export28" parent="." instance=ExtResource("15_sc4dx")]
+transform = Transform3D(0.897937, 0, 0.507842, 0, 0.677398, 0, -0.544303, 0, 0.837787, -0.355872, -0.0976847, -0.604151)

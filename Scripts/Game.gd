@@ -34,6 +34,7 @@ func AddTilesIfOpen():
 			if nextTileSlot: 
 				await nextTileSlot.Occupy(instance)
 				instance.TileFinishedResolving.connect(OnTileFinishedResolving)
+				instance.TileStartResolving.connect(OnTileStartResolving)
 			else:
 				print("No tile slot to fill! This is a big issue!")
 			await get_tree().process_frame
@@ -43,7 +44,11 @@ func AddTilesIfOpen():
 			if Deck.size() <= 0:
 				PutGraveyardBackToDeck()
 				
-				
+func OnTileStartResolving():
+	for tile in $Tiles.get_children():
+		tile.SetUsable(false)
+
+
 func PutGraveyardBackToDeck():
 	while Graveyard.size() > 0:
 		Deck.push_back(Graveyard.pop_front())
@@ -71,6 +76,8 @@ func OnTileFinishedResolving(tileScene):
 	await get_tree().process_frame
 	AddTilesIfOpen()
 	DeckUpdate.emit()
+	for tile in $Tiles.get_children():
+		tile.SetUsable(true)
 	
 func _ready() -> void:
 	#$TileGridContainer.Update(TileAmount)

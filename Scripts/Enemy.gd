@@ -26,5 +26,8 @@ func TakeDamage(amount):
 
 func OnPlayerPlayedTile():
 	if $HealthComponent.IsAlive():
+		$AnimationPlayer.stop()
+		$AnimationPlayer.play("attack")
+		await $AnimationPlayer.animation_finished
 		Finder.GetGame().TakeDamage(5)
 	

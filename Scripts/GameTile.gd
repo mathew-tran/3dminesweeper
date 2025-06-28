@@ -14,6 +14,8 @@ enum TILE_TYPE {
 	
 }
 
+var bCanBeUsed = true
+
 @export var TileTitle = "tile Title"
 
 func GetDescription():
@@ -26,6 +28,7 @@ func GetTitle():
 	return TileTitle
 	
 signal TileFinishedResolving(tile)
+signal TileStartResolving
 
 var CurrentState = TILE_STATE.UNFLIPPED
 var TileType = TILE_TYPE.GAME_TILE
@@ -36,12 +39,19 @@ func _ready() -> void:
 	if TileType == TILE_TYPE.SHOP_TILE:
 		$blockbench_export.rotation_degrees = Vector3.ZERO
 
+func SetUsable(bUsable):
+	bCanBeUsed = bUsable
+	
 func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	if bCanBeUsed == false:
+		return
+		
 	if CurrentState == TILE_STATE.FLIPPED or CurrentState == TILE_STATE.UNCLICKABLE:
 		return
 	if event.is_action_pressed("left_click"):
 		var tween = get_tree().create_tween()
 		if TileType == TILE_TYPE.GAME_TILE:
+			TileStartResolving.emit()
 			print(name + " clicked")
 			CurrentState = TILE_STATE.FLIPPED
 			var offsetVector = Vector3(0,.01,0)
