@@ -28,6 +28,7 @@ func OnPlayerPlayedTile():
 	if $HealthComponent.IsAlive():
 		$AnimationPlayer.stop()
 		$AnimationPlayer.play("attack")
+		Helper.CreateEffectParticle(global_position, Finder.GetGame().GetPlayerPosition(), 4)
 		await $AnimationPlayer.animation_finished
 		Finder.GetGame().TakeDamage(5)
 	

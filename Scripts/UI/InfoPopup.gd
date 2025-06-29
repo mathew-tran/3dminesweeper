@@ -15,3 +15,4 @@ func ShowInfo(data):
 	if data.has("title"):
 		$VBoxContainer/Title.text = data["title"]
 		$VBoxContainer/Title.visible = true
+	await get_tree().process_frame

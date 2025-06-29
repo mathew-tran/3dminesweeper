@@ -109,10 +109,13 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 
 func DoEffect():
 	CurrentState = TILE_STATE.FLIPPED
+	var speed = .1
 	for child in $Effects.get_children():
 		$blockbench_export/Node/cuboid/GPUParticles3D.emitting = true
+		var tween = get_tree().create_tween()
+		tween.tween_property($blockbench_export, "rotation_degrees", rotation_degrees + Vector3(90,0,0), speed)
+		await tween.finished
 		await child.DoAction()
-				
 				
 func PushToGraveyard():
 	var tween = get_tree().create_tween()
@@ -155,8 +158,7 @@ func _on_mouse_entered() -> void:
 		$blockbench_export/Node/cuboid.material_override = load("res://Shaders/GameTileHighlight.tres")
 	if TileType == TILE_TYPE.SHOP_TILE or TileVisibility == TILE_VISIBILITY.REVEALED:
 		ShowTileInfo()
-	else:
-		ShowHiddenTileInfo()
+
 
 func ShowHiddenTileInfo():
 	var data = {}

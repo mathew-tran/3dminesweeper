@@ -88,6 +88,7 @@ func SpawnCard(cardPools, slotChances):
 	var instance = card.instantiate()
 	instance.TileType = GameTile.TILE_TYPE.SHOP_TILE
 	$Tiles.add_child(instance)
+	instance.global_position = $TileSpawnPosition.global_position
 	instance.SceneRef = card
 	var slot = $GridContainer.GetNextOpenPosition()
 	if slot:

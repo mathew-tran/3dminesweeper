@@ -22,7 +22,7 @@ func AddTiles(cardData : CardData):
 func AddTilesIfOpen():
 	if $Tiles.get_child_count() != 0:
 		return
-	while $Tiles.get_child_count() < TileAmount:
+	while $Tiles.get_child_count() < TileAmount and Deck.size() > 0:
 		if Deck.size() > 0:
 			await get_tree().process_frame
 			var tile = Deck.pop_front()
@@ -40,9 +40,9 @@ func AddTilesIfOpen():
 			await get_tree().process_frame
 			await get_tree().create_timer(.01).timeout
 			DeckUpdate.emit()
-		else:
-			if Deck.size() <= 0:
-				PutGraveyardBackToDeck()
+	if Deck.size() <= 0:
+		PutGraveyardBackToDeck()
+		AddTilesIfOpen()
 				
 func OnTileStartResolving():
 	for tile in $Tiles.get_children():
@@ -68,12 +68,17 @@ func GetRevealedTiles():
 	var revealedTiles = []
 	for tile in $Tiles.get_children():
 		if tile.IsRevealed() and tile.IsFlipped() == false:
-			revealedTiles.append(tile)
+			if tile.is_queued_for_deletion() == false:
+				revealedTiles.append(tile)
 	return revealedTiles
 	
 func PutTilesBack():
 	for tile in $Tiles.get_children():
 		Deck.append(tile.SceneRef)
+		var tween = get_tree().create_tween()
+		tween.tween_property(tile, "global_position", Finder.GetTilePreviewSpot().global_position, .1)
+		tween.tween_property(tile, "rotation_degrees", Vector3(0,0, -180), .1)
+		await tween.finished
 		tile.queue_free()
 		
 func AddTileScene(tileScene):
@@ -110,8 +115,10 @@ func GoBackToGameView():
 	
 func OnMonsterKilled():
 	
-	PutTilesBack()
+	await PutTilesBack()
 	await PutGraveyardBackToDeck()
+	await get_tree().create_timer(1).timeout
+	
 	$Shop.Setup()
 	
 	ShuffleDeck()
@@ -141,3 +148,7 @@ func TakeDamage(amount):
 
 func Heal(amount):
 	$HealthComponent.Heal(amount)
+
+func GetPlayerPosition():
+	return $Sprite3D.global_position
+	

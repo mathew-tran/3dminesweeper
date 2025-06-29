@@ -16,5 +16,6 @@ emission_energy_multiplier = 24.85
 script = ExtResource("1_d5e8o")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("TubeTrailMesh_0smcy")
 material = SubResource("StandardMaterial3D_0smcy")
