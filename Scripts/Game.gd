@@ -64,6 +64,13 @@ func GetNonRevealedTiles():
 			nonRevealedTiles.append(tile)
 	return nonRevealedTiles
 	
+func GetRevealedTiles():
+	var revealedTiles = []
+	for tile in $Tiles.get_children():
+		if tile.IsRevealed() and tile.IsFlipped() == false:
+			revealedTiles.append(tile)
+	return revealedTiles
+	
 func PutTilesBack():
 	for tile in $Tiles.get_children():
 		Deck.append(tile.SceneRef)

@@ -40,10 +40,14 @@ var TileVisibility = TILE_VISIBILITY.NOT_REVEALED
 var SceneRef : PackedScene
 var OriginalPosition = Vector2.ZERO
 
+@export var bStartRevealed = false
+
 @export var Rarity : TILE_RARITY
 
 func GetDescription():
 	var description = ""
+	if bStartRevealed:
+		description += "Starts Revealed\n"
 	for effect in $Effects.get_children():
 		description += effect.GetDescription() +"\n"
 	return description
@@ -54,7 +58,7 @@ func GetTitle():
 func _ready() -> void:
 	if TileType == TILE_TYPE.SHOP_TILE:
 		$blockbench_export.rotation_degrees = Vector3.ZERO
-	OriginalPosition = global_position		
+		
 	
 	var rarityMaterial = load("res://Materials/MATERIAL_COMMON.tres")
 	match Rarity:
@@ -64,6 +68,10 @@ func _ready() -> void:
 			rarityMaterial = load("res://Materials/MATERIAL_RARE.tres")
 	
 	$blockbench_export/Node/cuboid/CSGMesh3D.material = rarityMaterial
+	
+	await get_tree().create_timer(.3).timeout
+	if bStartRevealed:
+		RevealTile()
 		
 func SetOriginalPosition():
 	OriginalPosition = global_position
@@ -83,26 +91,34 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 		if TileType == TILE_TYPE.GAME_TILE:
 			TileStartResolving.emit()
 			print(name + " clicked")
-			CurrentState = TILE_STATE.FLIPPED
-			await RevealTile()
-			for child in $Effects.get_children():
-				$blockbench_export/Node/cuboid/GPUParticles3D.emitting = true
-				await child.DoAction()
 			
+			await RevealTile()
+			
+			await DoEffect()
 			await MoveTileToSlot()
 			
-			tween = get_tree().create_tween()
-			tween.tween_property(self, "global_position", Finder.GetGraveyardPreviewSpot().global_position, .1)
-			await tween.finished
-			
-			
+		
 			Finder.GetGame().PlayTile()
 		elif TileType == TILE_TYPE.SHOP_TILE:
 			tween.tween_property(self, "global_position", Finder.GetGraveyardPreviewSpot().global_position, .1)
 			await tween.finished
 			Finder.GetGame().AddTileScene(SceneRef)
-		TileFinishedResolving.emit(SceneRef)
-		queue_free()
+		await PushToGraveyard()
+
+func DoEffect():
+	CurrentState = TILE_STATE.FLIPPED
+	for child in $Effects.get_children():
+		$blockbench_export/Node/cuboid/GPUParticles3D.emitting = true
+		await child.DoAction()
+				
+				
+func PushToGraveyard():
+	var tween = get_tree().create_tween()
+	tween = get_tree().create_tween()
+	tween.tween_property(self, "global_position", Finder.GetGraveyardPreviewSpot().global_position, .1)
+	await tween.finished
+	TileFinishedResolving.emit(SceneRef)
+	queue_free()
 
 func RevealTile():
 	SetOriginalPosition()

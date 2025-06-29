@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DeckData" load_steps=15 format=3 uid="uid://b4itrbxtgu4o"]
+[gd_resource type="Resource" script_class="DeckData" load_steps=13 format=3 uid="uid://b4itrbxtgu4o"]
 
 [ext_resource type="Script" uid="uid://cy5382418d46q" path="res://Content/DeckData.gd" id="1_k2j4e"]
 [ext_resource type="Script" uid="uid://bduo7injt7042" path="res://Content/CardData.gd" id="1_kg2au"]
@@ -6,8 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b7cli5fsp4d76" path="res://Prefabs/Tiles/Common/GameTileEmpty.tscn" id="3_0y4k7"]
 [ext_resource type="PackedScene" uid="uid://croi21rpasjxq" path="res://Prefabs/Tiles/Common/GameTileRedo.tscn" id="4_lrcfg"]
 [ext_resource type="PackedScene" uid="uid://dkbios2x02k1y" path="res://Prefabs/Tiles/Rare/GameTileReveal.tscn" id="5_lrcfg"]
-[ext_resource type="PackedScene" uid="uid://chlg3a7vwl3n1" path="res://Prefabs/Tiles/Uncommon/GameTileDealDoubleDamage.tscn" id="6_mu547"]
-[ext_resource type="PackedScene" uid="uid://tnwocmgdd2pm" path="res://Prefabs/Tiles/Rare/GameTileHeal.tscn" id="7_18hkx"]
+[ext_resource type="PackedScene" uid="uid://cqpyomvfvjfbc" path="res://Prefabs/Tiles/Uncommon/GameTileRevealingTruth.tscn" id="6_mu547"]
 
 [sub_resource type="Resource" id="Resource_g3p6y"]
 script = ExtResource("1_kg2au")
@@ -35,17 +34,11 @@ metadata/_custom_type_script = "uid://bduo7injt7042"
 
 [sub_resource type="Resource" id="Resource_2kbfe"]
 script = ExtResource("1_kg2au")
-Amount = 2
-Path = ExtResource("6_mu547")
-metadata/_custom_type_script = "uid://bduo7injt7042"
-
-[sub_resource type="Resource" id="Resource_lf0ka"]
-script = ExtResource("1_kg2au")
 Amount = 3
-Path = ExtResource("7_18hkx")
+Path = ExtResource("6_mu547")
 metadata/_custom_type_script = "uid://bduo7injt7042"
 
 [resource]
 script = ExtResource("1_k2j4e")
-Tiles = Array[ExtResource("1_kg2au")]([SubResource("Resource_g3p6y"), SubResource("Resource_mu547"), SubResource("Resource_18hkx"), SubResource("Resource_bi8ss"), SubResource("Resource_2kbfe"), SubResource("Resource_lf0ka")])
+Tiles = Array[ExtResource("1_kg2au")]([SubResource("Resource_g3p6y"), SubResource("Resource_mu547"), SubResource("Resource_18hkx"), SubResource("Resource_bi8ss"), SubResource("Resource_2kbfe")])
 metadata/_custom_type_script = "uid://cy5382418d46q"
