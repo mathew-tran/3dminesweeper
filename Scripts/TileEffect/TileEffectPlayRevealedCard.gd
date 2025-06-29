@@ -14,6 +14,8 @@ func DoAction():
 		if revealedTiles.size() > 0:
 			var revealedTile = revealedTiles.pop_front()
 			print("Playing a revealed tile: " + revealedTile.TileTitle)
+			var effect = Helper.CreateEffectParticle(GetOwningTile().global_position, revealedTile.global_position, 10)
+			await effect.DestinationComplete
 			await revealedTile.DoEffect()
 			await revealedTile.PushToGraveyard()
 			await get_tree().create_timer(.2).timeout

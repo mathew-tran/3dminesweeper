@@ -195,3 +195,5 @@ transform = Transform3D(0.897937, 0, 0.507842, 0, 1, 0, -0.544303, 0, 0.837787, 
 
 [node name="blockbench_export28" parent="." instance=ExtResource("15_sc4dx")]
 transform = Transform3D(0.897937, 0, 0.507842, 0, 0.677398, 0, -0.544303, 0, 0.837787, -0.355872, -0.0976847, -0.604151)
+
+[node name="SpecialEffects" type="Node3D" parent="." groups=["SpecialEffects"]]

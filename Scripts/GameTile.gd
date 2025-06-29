@@ -69,9 +69,11 @@ func _ready() -> void:
 	
 	$blockbench_export/Node/cuboid/CSGMesh3D.material = rarityMaterial
 	
-	await get_tree().create_timer(.3).timeout
+	await get_tree().create_timer(.2).timeout
 	if bStartRevealed:
-		RevealTile()
+		await RevealTile()
+		Finder.GetInfoPopup().ShowInfo(null)
+		
 		
 func SetOriginalPosition():
 	OriginalPosition = global_position

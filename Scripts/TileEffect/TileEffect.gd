@@ -9,6 +9,8 @@ func GetDescription():
 func DoAction():
 	var enemy = Finder.GetEnemy()
 	if enemy:
+		var effect = Helper.CreateEffectParticle(GetOwningTile().global_position, enemy.global_position, 10)
+		await effect.DestinationComplete
 		enemy.TakeDamage(Damage)
 		await get_tree().create_timer(.3).timeout
 	

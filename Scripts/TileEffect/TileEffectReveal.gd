@@ -13,6 +13,8 @@ func DoAction():
 	while tilesToReveal > 0:
 		if tiles.size() > 0:
 			var tile = tiles.pop_front()
+			var effect = Helper.CreateEffectParticle(GetOwningTile().global_position, tile.global_position, 10)
+			await effect.DestinationComplete
 			await tile.RevealTile()
 			await tile.MoveTileToSlot()
 		tilesToReveal -= 1

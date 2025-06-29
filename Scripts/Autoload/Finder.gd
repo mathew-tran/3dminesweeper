@@ -30,3 +30,9 @@ func GetInfoPopup() -> InfoPopup:
 		return result[0]
 	return null
 		
+
+func GetSpecialEffectsGroup():
+	var result = get_tree().get_nodes_in_group("SpecialEffects")
+	if result:
+		return result[0]
+	return null
