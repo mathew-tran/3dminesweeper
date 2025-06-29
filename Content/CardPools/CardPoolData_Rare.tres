@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardPoolData" load_steps=5 format=3 uid="uid://vta4ddbs5m7v"]
+
+[ext_resource type="PackedScene" uid="uid://tnwocmgdd2pm" path="res://Prefabs/Tiles/Rare/GameTileHeal.tscn" id="1_kqsma"]
+[ext_resource type="PackedScene" uid="uid://dkbios2x02k1y" path="res://Prefabs/Tiles/Rare/GameTileReveal.tscn" id="2_h7ifn"]
+[ext_resource type="Script" uid="uid://lavt5hngenx1" path="res://Content/CardPoolData.gd" id="2_kqsma"]
+[ext_resource type="PackedScene" uid="uid://bcobl3hghsion" path="res://Prefabs/Tiles/Rare/GameTilePinStrike.tscn" id="3_h7ifn"]
+
+[resource]
+script = ExtResource("2_kqsma")
+Tiles = Array[PackedScene]([ExtResource("1_kqsma"), ExtResource("2_h7ifn"), ExtResource("3_h7ifn")])
+metadata/_custom_type_script = "uid://lavt5hngenx1"

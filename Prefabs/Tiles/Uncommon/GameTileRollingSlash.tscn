@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://d117vs6882nq4"]
+
+[ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_jub7y"]
+[ext_resource type="Texture2D" uid="uid://cjhsgi2tqc0yx" path="res://Sprites/RollingSlash.png" id="2_jub7y"]
+[ext_resource type="Script" uid="uid://c6kolmtilbqdq" path="res://Scripts/TileEffect/TileEffect.gd" id="3_q1s0s"]
+[ext_resource type="Script" uid="uid://cxme8ni4a2hxu" path="res://Scripts/TileEffect/TileEffectSkipTurn.gd" id="4_33tm7"]
+
+[node name="GameTile" instance=ExtResource("1_jub7y")]
+TileTitle = "ROLLING SLASH"
+Rarity = 1
+
+[node name="Sprite3D" parent="blockbench_export" index="1"]
+transform = Transform3D(-0.037, -5.58684e-09, 2.44209e-16, 0, -1.61732e-09, -0.037, 5.58684e-09, -0.037, 1.61732e-09, 9.24617e-10, 0.0105764, 0)
+texture = ExtResource("2_jub7y")
+
+[node name="TileEffectDoDamage" type="Node2D" parent="Effects" index="0"]
+script = ExtResource("3_q1s0s")
+metadata/_custom_type_script = "uid://c6kolmtilbqdq"
+
+[node name="TileEffectSkipTurn" type="Node2D" parent="Effects" index="1"]
+script = ExtResource("4_33tm7")
+metadata/_custom_type_script = "uid://cxme8ni4a2hxu"
+
+[editable path="blockbench_export"]

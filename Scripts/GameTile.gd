@@ -13,6 +13,12 @@ enum TILE_TYPE {
 	SHOP_TILE
 }
 
+enum TILE_RARITY {
+	COMMON, # white
+	UNCOMMON, # blue 
+	RARE # yello
+}
+
 enum TILE_VISIBILITY {
 	REVEALED,
 	NOT_REVEALED
@@ -34,6 +40,8 @@ var TileVisibility = TILE_VISIBILITY.NOT_REVEALED
 var SceneRef : PackedScene
 var OriginalPosition = Vector2.ZERO
 
+@export var Rarity : TILE_RARITY
+
 func GetDescription():
 	var description = ""
 	for effect in $Effects.get_children():
@@ -46,8 +54,17 @@ func GetTitle():
 func _ready() -> void:
 	if TileType == TILE_TYPE.SHOP_TILE:
 		$blockbench_export.rotation_degrees = Vector3.ZERO
-	OriginalPosition = global_position			
-
+	OriginalPosition = global_position		
+	
+	var rarityMaterial = load("res://Materials/MATERIAL_COMMON.tres")
+	match Rarity:
+		TILE_RARITY.UNCOMMON:
+			rarityMaterial = load("res://Materials/MATERIAL_UNCOMMON.tres")
+		TILE_RARITY.RARE:
+			rarityMaterial = load("res://Materials/MATERIAL_RARE.tres")
+	
+	$blockbench_export/Node/cuboid/CSGMesh3D.material = rarityMaterial
+		
 func SetOriginalPosition():
 	OriginalPosition = global_position
 	

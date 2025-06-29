@@ -1,14 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2ll27us1m10f"]
+[gd_scene load_steps=8 format=3 uid="uid://b2ll27us1m10f"]
 
 [ext_resource type="Script" uid="uid://dokd7dv47iv73" path="res://Scripts/Shop.gd" id="1_pu482"]
 [ext_resource type="PackedScene" uid="uid://dn3eh371dddi7" path="res://Models/Shop/Shop.gltf" id="1_wubrc"]
 [ext_resource type="Resource" uid="uid://rfaahonfsri2" path="res://Content/CardPools/CardPoolData_Common.tres" id="2_0y0u7"]
 [ext_resource type="Script" uid="uid://dqyg5mns7ccw7" path="res://Scripts/Editor/ToolTileGridContainer.gd" id="2_pu482"]
 [ext_resource type="PackedScene" uid="uid://x276p6483jes" path="res://Prefabs/TileSlot.tscn" id="3_0y0u7"]
+[ext_resource type="Resource" uid="uid://du17xcctl366x" path="res://Content/CardPools/CardPoolData_Uncommon.tres" id="3_cetby"]
+[ext_resource type="Resource" uid="uid://vta4ddbs5m7v" path="res://Content/CardPools/CardPoolData_Rare.tres" id="4_bgph2"]
 
 [node name="Shop" type="Node3D"]
 script = ExtResource("1_pu482")
-CardPoolsEasy = ExtResource("2_0y0u7")
+CardPoolsCommon = ExtResource("2_0y0u7")
+CardPoolsUncommon = ExtResource("3_cetby")
+CardPoolsRare = ExtResource("4_bgph2")
 
 [node name="blockbench_export" parent="." instance=ExtResource("1_wubrc")]
 

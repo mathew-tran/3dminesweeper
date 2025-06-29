@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://tnwocmgdd2pm"]
+
+[ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_t7iiu"]
+[ext_resource type="Texture2D" uid="uid://difyytdyd1dj0" path="res://Sprites/Heal.png" id="2_v7jq8"]
+[ext_resource type="Script" uid="uid://ccqhmloqjbnyh" path="res://Scripts/TileEffect/TileEffectHeal.gd" id="3_ih1p0"]
+
+[node name="GameTile" instance=ExtResource("1_t7iiu")]
+TileTitle = "HEAL"
+Rarity = 2
+
+[node name="Sprite3D" parent="blockbench_export" index="1"]
+transform = Transform3D(-0.037, -5.58684e-09, 2.44209e-16, 0, -1.61732e-09, -0.037, 5.58684e-09, -0.037, 1.61732e-09, 9.24617e-10, 0.0105764, 0)
+texture = ExtResource("2_v7jq8")
+
+[node name="TileEffectHeal" type="Node2D" parent="Effects" index="0"]
+script = ExtResource("3_ih1p0")
+Amount = 5
+metadata/_custom_type_script = "uid://ccqhmloqjbnyh"
+
+[editable path="blockbench_export"]

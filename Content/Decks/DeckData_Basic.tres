@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cy5382418d46q" path="res://Content/DeckData.gd" id="1_k2j4e"]
 [ext_resource type="Script" uid="uid://bduo7injt7042" path="res://Content/CardData.gd" id="1_kg2au"]
-[ext_resource type="PackedScene" uid="uid://ba05t00ol2um6" path="res://Prefabs/Tiles/GameTileDealDamage.tscn" id="2_gl01f"]
-[ext_resource type="PackedScene" uid="uid://b7cli5fsp4d76" path="res://Prefabs/Tiles/GameTileEmpty.tscn" id="3_0y4k7"]
-[ext_resource type="PackedScene" uid="uid://croi21rpasjxq" path="res://Prefabs/Tiles/GameTileRedo.tscn" id="4_lrcfg"]
-[ext_resource type="PackedScene" uid="uid://dkbios2x02k1y" path="res://Prefabs/Tiles/GameTileReveal.tscn" id="5_lrcfg"]
-[ext_resource type="PackedScene" uid="uid://chlg3a7vwl3n1" path="res://Prefabs/Tiles/GameTileDealDoubleDamage.tscn" id="6_mu547"]
-[ext_resource type="PackedScene" uid="uid://tnwocmgdd2pm" path="res://Prefabs/Tiles/GameTileHeal.tscn" id="7_18hkx"]
+[ext_resource type="PackedScene" uid="uid://ba05t00ol2um6" path="res://Prefabs/Tiles/Common/GameTileDealDamage.tscn" id="2_gl01f"]
+[ext_resource type="PackedScene" uid="uid://b7cli5fsp4d76" path="res://Prefabs/Tiles/Common/GameTileEmpty.tscn" id="3_0y4k7"]
+[ext_resource type="PackedScene" uid="uid://croi21rpasjxq" path="res://Prefabs/Tiles/Common/GameTileRedo.tscn" id="4_lrcfg"]
+[ext_resource type="PackedScene" uid="uid://dkbios2x02k1y" path="res://Prefabs/Tiles/Rare/GameTileReveal.tscn" id="5_lrcfg"]
+[ext_resource type="PackedScene" uid="uid://chlg3a7vwl3n1" path="res://Prefabs/Tiles/Uncommon/GameTileDealDoubleDamage.tscn" id="6_mu547"]
+[ext_resource type="PackedScene" uid="uid://tnwocmgdd2pm" path="res://Prefabs/Tiles/Rare/GameTileHeal.tscn" id="7_18hkx"]
 
 [sub_resource type="Resource" id="Resource_g3p6y"]
 script = ExtResource("1_kg2au")

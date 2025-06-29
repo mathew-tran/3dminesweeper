@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckj12a1x8cor4"]
+
+[ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_oakvo"]
+[ext_resource type="Texture2D" uid="uid://bmb60d027frap" path="res://Sprites/VampiricBite.png" id="2_oakvo"]
+[ext_resource type="Script" uid="uid://c6kolmtilbqdq" path="res://Scripts/TileEffect/TileEffect.gd" id="3_jkygt"]
+[ext_resource type="Script" uid="uid://ccqhmloqjbnyh" path="res://Scripts/TileEffect/TileEffectHeal.gd" id="4_ekfud"]
+
+[node name="GameTile" instance=ExtResource("1_oakvo")]
+TileTitle = "VAMPIRIC BITE"
+Rarity = 1
+
+[node name="Sprite3D" parent="blockbench_export" index="1"]
+transform = Transform3D(-0.037, -5.58684e-09, 2.44209e-16, 0, -1.61732e-09, -0.037, 5.58684e-09, -0.037, 1.61732e-09, 9.24617e-10, 0.0105764, 0)
+texture = ExtResource("2_oakvo")
+
+[node name="TileEffectDoDamage" type="Node2D" parent="Effects" index="0"]
+script = ExtResource("3_jkygt")
+Damage = 2
+metadata/_custom_type_script = "uid://c6kolmtilbqdq"
+
+[node name="TileEffectHeal" type="Node2D" parent="Effects" index="1"]
+script = ExtResource("4_ekfud")
+metadata/_custom_type_script = "uid://ccqhmloqjbnyh"
+
+[editable path="blockbench_export"]
