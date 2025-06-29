@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkbios2x02k1y"]
+
+[ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_m6vkr"]
+[ext_resource type="Texture2D" uid="uid://mthi3h2b3d6p" path="res://Sprites/Reveal.png" id="2_s4bht"]
+[ext_resource type="Script" uid="uid://cxme8ni4a2hxu" path="res://Scripts/TileEffect/TileEffectSkipTurn.gd" id="3_ccwn1"]
+[ext_resource type="Script" uid="uid://xj3x0yg3xw3j" path="res://Scripts/TileEffect/TileEffectReveal.gd" id="3_rr5js"]
+
+[node name="GameTile" instance=ExtResource("1_m6vkr")]
+TileTitle = "REVEAL"
+
+[node name="Sprite3D" parent="blockbench_export" index="1"]
+texture = ExtResource("2_s4bht")
+
+[node name="TileEffectRevealTiles" type="Node2D" parent="Effects" index="0"]
+script = ExtResource("3_rr5js")
+Amount = 2
+metadata/_custom_type_script = "uid://xj3x0yg3xw3j"
+
+[node name="TileEffectSkipTurn" type="Node2D" parent="Effects" index="1"]
+script = ExtResource("3_ccwn1")
+metadata/_custom_type_script = "uid://cxme8ni4a2hxu"
+
+[editable path="blockbench_export"]

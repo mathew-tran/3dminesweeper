@@ -57,6 +57,13 @@ func PutGraveyardBackToDeck():
 	Deck.shuffle()
 	DeckUpdate.emit()
 	
+func GetNonRevealedTiles():
+	var nonRevealedTiles = []
+	for tile in $Tiles.get_children():
+		if tile.IsRevealed() == false:
+			nonRevealedTiles.append(tile)
+	return nonRevealedTiles
+	
 func PutTilesBack():
 	for tile in $Tiles.get_children():
 		Deck.append(tile.SceneRef)
@@ -124,3 +131,6 @@ func SkipTurn():
 	
 func TakeDamage(amount):
 	$HealthComponent.TakeDamage(amount)
+
+func Heal(amount):
+	$HealthComponent.Heal(amount)

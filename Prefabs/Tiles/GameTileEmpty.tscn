@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7cli5fsp4d76"]
+[gd_scene load_steps=4 format=3 uid="uid://b7cli5fsp4d76"]
 
 [ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_13g1t"]
 [ext_resource type="Texture2D" uid="uid://dqbwyhrg6y40" path="res://Sprites/Nothing.png" id="2_ima83"]
+[ext_resource type="Script" uid="uid://d06vhoqkmpm5c" path="res://Scripts/TileEffect/TileEffectNothing.gd" id="3_6t1r7"]
 
 [node name="GameTile" instance=ExtResource("1_13g1t")]
 TileTitle = "EMPTY"
 
 [node name="Sprite3D" parent="blockbench_export" index="1"]
 texture = ExtResource("2_ima83")
+
+[node name="TileEffectDoNothing" type="Node2D" parent="Effects" index="0"]
+script = ExtResource("3_6t1r7")
+metadata/_custom_type_script = "uid://d06vhoqkmpm5c"
 
 [editable path="blockbench_export"]

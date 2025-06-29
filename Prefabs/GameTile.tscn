@@ -1,8 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0n6a6wl5obia"]
+[gd_scene load_steps=11 format=3 uid="uid://c0n6a6wl5obia"]
 
 [ext_resource type="Script" uid="uid://bjkxdsetn0f2g" path="res://Scripts/GameTile.gd" id="1_fhj7f"]
 [ext_resource type="PackedScene" uid="uid://d0f4rrupdu72k" path="res://Models/Tile/tile.gltf" id="1_g8rft"]
 [ext_resource type="Texture2D" uid="uid://ckgt5tbtc3si" path="res://Sprites/Sword.png" id="2_x34bm"]
+
+[sub_resource type="Curve" id="Curve_fhj7f"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_duobb"]
+curve = SubResource("Curve_fhj7f")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8o6j5"]
+gravity = Vector3(0, 0, 0)
+scale_min = 0.08
+scale_max = 0.08
+scale_curve = SubResource("CurveTexture_duobb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vtvox"]
+transparency = 1
+albedo_color = Color(0.925862, 0.561623, 0.0466148, 0.239216)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qb0gn"]
+material = SubResource("StandardMaterial3D_vtvox")
+
+[sub_resource type="Skin" id="Skin_q5vwt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fhj7f"]
 size = Vector3(0.065, 0.016311, 0.065)
@@ -12,6 +34,16 @@ script = ExtResource("1_fhj7f")
 
 [node name="blockbench_export" parent="." instance=ExtResource("1_g8rft")]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="blockbench_export/Node/cuboid" index="0"]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, -0.00351562, 0)
+emitting = false
+amount = 1
+lifetime = 0.2
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_8o6j5")
+draw_pass_1 = SubResource("SphereMesh_qb0gn")
+draw_skin = SubResource("Skin_q5vwt")
 
 [node name="Sprite3D" type="Sprite3D" parent="blockbench_export"]
 transform = Transform3D(-0.04, 1.52855e-16, -3.49691e-09, 3.49691e-09, 1.74846e-09, -0.04, 0, -0.04, -1.74846e-09, 8.20986e-10, 0.00939098, 0)

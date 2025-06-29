@@ -13,5 +13,7 @@ func Setup():
 func Update():
 	$Label.text = str(HealthComponentRef.CurrentHealth) + "/" + str(HealthComponentRef.MaxHealth)
 	value = float(HealthComponentRef.CurrentHealth) / float(HealthComponentRef.MaxHealth)
+	$AnimationPlayer.play("hit")
+	
 func OnTakeDamage(amount):
 	Update()

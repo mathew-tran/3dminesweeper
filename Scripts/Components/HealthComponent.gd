@@ -26,6 +26,17 @@ func Setup():
 	await get_tree().process_frame
 	OnSetup.emit()
 	
+func Heal(amount):
+	if CurrentState == STATE.DEAD:
+		return
+		
+	CurrentHealth += amount
+	
+	
+	if CurrentHealth > MaxHealth:
+		CurrentHealth = MaxHealth
+	OnTakeDamage.emit(0)
+	
 func TakeDamage(amount):
 	if CurrentState == STATE.DEAD:
 		return
