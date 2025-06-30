@@ -15,5 +15,5 @@ func Update():
 	value = float(HealthComponentRef.CurrentHealth) / float(HealthComponentRef.MaxHealth)
 	$AnimationPlayer.play("hit")
 	
-func OnTakeDamage(amount):
+func OnTakeDamage(_amount):
 	Update()

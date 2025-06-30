@@ -15,5 +15,5 @@ func Occupy(tile : GameTile):
 	tile.TileFinishedResolving.connect(OnTileFinishedResolving)
 	await tween.finished
 	
-func OnTileFinishedResolving(tile):
+func OnTileFinishedResolving(_tile):
 	TileRef = null

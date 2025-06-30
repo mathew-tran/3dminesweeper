@@ -4,6 +4,7 @@ class_name Game
 
 @export var DeckRef : DeckData
 
+
 signal PlayerPlayedTile
 signal DeckUpdate
 
@@ -14,6 +15,24 @@ var Skips = 0
 var LivingTiles = []
 
 var TileAmount = 10
+
+enum GAME_STATE {
+	CAN_PLAY_TILES,
+	RESOLVING,
+	ENEMY_TURN,
+	SHOP
+}
+
+var CurrentState = GAME_STATE.CAN_PLAY_TILES
+
+signal StateUpdate(state)
+
+func CanPlayTiles():
+	return CurrentState == GAME_STATE.CAN_PLAY_TILES
+	
+func SetGameState(state : GAME_STATE):
+	CurrentState = state
+	StateUpdate.emit(state)
 
 func AddTiles(cardData : CardData):
 	for x in range(0, cardData.Amount):
@@ -28,13 +47,14 @@ func AddTilesIfOpen():
 			var tile = Deck.pop_front()
 			var instance = tile.instantiate()
 			instance.SceneRef = tile
-			instance.global_position = Finder.GetTilePreviewSpot().global_position
+			
 			$Tiles.add_child(instance)
+			instance.global_position = Finder.GetTilePreviewSpot().global_position
 			var nextTileSlot = $TileGridContainer.GetNextOpenPosition()
 			if nextTileSlot: 
 				await nextTileSlot.Occupy(instance)
 				instance.TileFinishedResolving.connect(OnTileFinishedResolving)
-				instance.TileStartResolving.connect(OnTileStartResolving)
+		
 			else:
 				print("No tile slot to fill! This is a big issue!")
 			await get_tree().process_frame
@@ -44,9 +64,6 @@ func AddTilesIfOpen():
 		PutGraveyardBackToDeck()
 		AddTilesIfOpen()
 				
-func OnTileStartResolving():
-	for tile in $Tiles.get_children():
-		tile.SetUsable(false)
 
 
 func PutGraveyardBackToDeck():
@@ -72,7 +89,7 @@ func GetRevealedTiles():
 				revealedTiles.append(tile)
 	return revealedTiles
 	
-func PutTilesBack():
+func PutTilesBackFromField():
 	for tile in $Tiles.get_children():
 		Deck.append(tile.SceneRef)
 		var tween = get_tree().create_tween()
@@ -95,9 +112,8 @@ func OnTileFinishedResolving(tileScene):
 	await get_tree().process_frame
 	AddTilesIfOpen()
 	DeckUpdate.emit()
-	for tile in $Tiles.get_children():
-		tile.SetUsable(true)
-	
+
+
 func _ready() -> void:
 	#$TileGridContainer.Update(TileAmount)
 	
@@ -113,26 +129,31 @@ func _ready() -> void:
 func GoBackToGameView():
 	$Camera3D.make_current()
 	
-func OnMonsterKilled():
+func OnMonsterKilled(enemy):
 	
-	await PutTilesBack()
-	await PutGraveyardBackToDeck()
+	SetGameState(GAME_STATE.SHOP)
 	await get_tree().create_timer(1).timeout
-	
+	await PutTilesBackFromField()
+	await PutGraveyardBackToDeck()	
 	$Shop.Setup()
+	enemy.queue_free()
 	
 	ShuffleDeck()
 	await $Shop.ShopComplete
 	GoBackToGameView()
 	$Spawner.SpawnMonster()
 	await AddTilesIfOpen()
+	SetGameState(GAME_STATE.CAN_PLAY_TILES)
 	
 		
-func OnTakeDamage(amount):
+func OnTakeDamage(_amount):
 	pass
 
 func OnDeath():
 	get_tree().reload_current_scene()
+	
+func CanPlayExtraTurn():
+	return Skips > 0
 	
 func PlayTile():
 	if Skips > 0:

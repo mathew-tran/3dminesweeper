@@ -4,7 +4,7 @@ extends Node
 
 func CreateEffectParticle(startPosition, endPosition, speed) -> CustomPathToEffect:
 	var instance = EffectParticle.instantiate()
-	instance.global_position = startPosition
+	instance.StartPosition = startPosition
 	instance.Setup(endPosition, speed)
 	Finder.GetSpecialEffectsGroup().add_child(instance)
 	return instance

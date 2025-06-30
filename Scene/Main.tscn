@@ -39,6 +39,9 @@ script = ExtResource("2_togfq")
 MaxHealth = 55
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.716619, 0.697465, 0, -0.697465, 0.716619, 0, 0, 0)
+light_color = Color(0.00392157, 0.254902, 0.815686, 1)
+shadow_enabled = true
 
 [node name="Playspace" parent="." instance=ExtResource("3_djkur")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.092492, -0.421679)

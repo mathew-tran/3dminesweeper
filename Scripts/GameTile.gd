@@ -31,7 +31,6 @@ var bCanBeUsed = true
 
 	
 signal TileFinishedResolving(tile)
-signal TileStartResolving
 
 var CurrentState = TILE_STATE.UNFLIPPED
 var TileType = TILE_TYPE.GAME_TILE
@@ -88,24 +87,38 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 	if CurrentState == TILE_STATE.FLIPPED or CurrentState == TILE_STATE.UNCLICKABLE:
 		return
 	if event.is_action_pressed("left_click"):
+		
 		SetOriginalPosition()
-		var tween = get_tree().create_tween()
-		if TileType == TILE_TYPE.GAME_TILE:
-			TileStartResolving.emit()
-			print(name + " clicked")
-			
+		
+		if TileType == TILE_TYPE.GAME_TILE and Finder.GetGame().CanPlayTiles():
+			#print(name + " clicked")
+			Finder.GetGame().PlayTile()		
+			Finder.GetGame().SetGameState(Game.GAME_STATE.RESOLVING)	
 			await RevealTile()
 			
 			await DoEffect()
 			await MoveTileToSlot()
 			
 		
-			Finder.GetGame().PlayTile()
+			await PushToGraveyard()
+			if Finder.GetEnemy().IsAlive():
+				if Finder.GetGame().CanPlayExtraTurn():
+						Finder.GetGame().SetGameState(Game.GAME_STATE.CAN_PLAY_TILES)
+				else:
+					Finder.GetGame().SetGameState(Game.GAME_STATE.ENEMY_TURN)
+			else:
+				Finder.GetGame().SetGameState(Game.GAME_STATE.CAN_PLAY_TILES)
+			
+				
+			
 		elif TileType == TILE_TYPE.SHOP_TILE:
+			var tween = get_tree().create_tween()
 			tween.tween_property(self, "global_position", Finder.GetGraveyardPreviewSpot().global_position, .1)
 			await tween.finished
 			Finder.GetGame().AddTileScene(SceneRef)
-		await PushToGraveyard()
+			await PushToGraveyard()
+		
+
 
 func DoEffect():
 	CurrentState = TILE_STATE.FLIPPED
@@ -119,7 +132,6 @@ func DoEffect():
 				
 func PushToGraveyard():
 	var tween = get_tree().create_tween()
-	tween = get_tree().create_tween()
 	tween.tween_property(self, "global_position", Finder.GetGraveyardPreviewSpot().global_position, .1)
 	await tween.finished
 	TileFinishedResolving.emit(SceneRef)

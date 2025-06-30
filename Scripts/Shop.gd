@@ -96,7 +96,7 @@ func SpawnCard(cardPools, slotChances):
 		instance.TileFinishedResolving.connect(OnTileFinishedResolving)
 	return cardPools
 	
-func OnTileFinishedResolving(tileScene):
+func OnTileFinishedResolving(_tileScene):
 	ShopComplete.emit()
 	Cleanup()
 	

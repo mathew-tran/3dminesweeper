@@ -1,6 +1,6 @@
 extends Node3D
 
-signal MonsterKilled
+signal MonsterKilled(enemy)
 
 func _ready() -> void:
 	SpawnMonster()
@@ -11,7 +11,8 @@ func SpawnMonster():
 	instance.global_position = $MonsterPosition.global_position
 	instance.OnDeath.connect(OnDeath)
 	
-func OnDeath():
-	MonsterKilled.emit()
+func OnDeath(enemy):
+	MonsterKilled.emit(enemy)
+	
 	
 	
