@@ -2,6 +2,8 @@ extends Node3D
 
 class_name Enemy
 
+@export var MoneyToGive = 3
+
 signal OnDeath(enemy)
 
 func _ready() -> void:
@@ -15,6 +17,8 @@ func OnTakeDamage(_amount):
 	
 func OnEnemyDeath():
 	
+	var amount = MoneyToGive + randi() % 3
+	Finder.GetGame().AddMoney(amount)
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("death")
 	await $AnimationPlayer.animation_finished

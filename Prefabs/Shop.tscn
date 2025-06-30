@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2ll27us1m10f"]
+[gd_scene load_steps=9 format=3 uid="uid://b2ll27us1m10f"]
 
 [ext_resource type="Script" uid="uid://dokd7dv47iv73" path="res://Scripts/Shop.gd" id="1_pu482"]
 [ext_resource type="PackedScene" uid="uid://dn3eh371dddi7" path="res://Models/Shop/Shop.gltf" id="1_wubrc"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://x276p6483jes" path="res://Prefabs/TileSlot.tscn" id="3_0y0u7"]
 [ext_resource type="Resource" uid="uid://du17xcctl366x" path="res://Content/CardPools/CardPoolData_Uncommon.tres" id="3_cetby"]
 [ext_resource type="Resource" uid="uid://vta4ddbs5m7v" path="res://Content/CardPools/CardPoolData_Rare.tres" id="4_bgph2"]
+[ext_resource type="PackedScene" uid="uid://dgf56ndysg1x1" path="res://Prefabs/UI/MoneyUI.tscn" id="8_bgph2"]
 
 [node name="Shop" type="Node3D"]
 script = ExtResource("1_pu482")
@@ -43,3 +44,35 @@ text = "Pick a tile"
 
 [node name="TileSpawnPosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.531303)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -258.5
+offset_top = -152.0
+offset_right = 258.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Button"]
+layout_mode = 0
+offset_right = 517.0
+offset_bottom = 73.0
+text = "REROLL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoneyUI" parent="CanvasLayer/Button" instance=ExtResource("8_bgph2")]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 57.0
+offset_right = 378.0
+offset_bottom = 185.0
+
+[connection signal="button_up" from="CanvasLayer/Button" to="." method="_on_button_button_up"]

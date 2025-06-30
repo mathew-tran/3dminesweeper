@@ -11,6 +11,7 @@ signal DeckUpdate
 var Deck = []
 var Graveyard = []
 var Skips = 0
+var Money = 10
 
 var LivingTiles = []
 
@@ -26,7 +27,22 @@ enum GAME_STATE {
 var CurrentState = GAME_STATE.CAN_PLAY_TILES
 
 signal StateUpdate(state)
+signal MoneyUpdate
 
+func AddMoney(amount):
+	Money += amount
+	MoneyUpdate.emit()
+	
+func RemoveMoney(amount):
+	Money -= amount
+	MoneyUpdate.emit()
+	
+func CanAfford(amount):
+	return Money >= amount
+	
+func GetMoney():
+	return Money
+	
 func CanPlayTiles():
 	return CurrentState == GAME_STATE.CAN_PLAY_TILES
 	
@@ -115,8 +131,9 @@ func OnTileFinishedResolving(tileScene):
 
 
 func _ready() -> void:
-	#$TileGridContainer.Update(TileAmount)
-	
+
+	MoneyUpdate.connect(OnMoneyUpdate)
+	OnMoneyUpdate()
 	DeckRef.CreateDeck()
 	Deck.shuffle()
 
@@ -126,6 +143,9 @@ func _ready() -> void:
 	$Spawner.MonsterKilled.connect(OnMonsterKilled)
 	await AddTilesIfOpen()
 
+func OnMoneyUpdate():
+	$CanvasLayer/MoneyUI.Update(Money)
+	
 func GoBackToGameView():
 	$Camera3D.make_current()
 	

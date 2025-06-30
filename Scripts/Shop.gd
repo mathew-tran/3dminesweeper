@@ -21,9 +21,11 @@ var thirdSlotData = {
 	"uncommon" : 70,
 	"rare" : 20,
 }
-func Setup():
-	$Camera3D.make_current()
-	Cleanup()
+var RerollAmount = 3
+var DefaultRerollAmount = 3
+
+func PopulateTiles():
+	await Cleanup()
 	var cardPools = []
 	var commonCards = []
 	var unCommonCards = []
@@ -49,19 +51,16 @@ func Setup():
 	cardPools = SpawnCard(cardPools, thirdSlotData)	
 	cardPools = SpawnCard(cardPools, secondSlotData)
 	cardPools = SpawnCard(cardPools, firstSlotData)
+	await get_tree().create_timer(.25).timeout
 	
+func Setup():
+	$CanvasLayer.visible = true
+	RerollAmount = DefaultRerollAmount
 	
+	UpdateReroll()
+	$Camera3D.make_current()
 	
-	#for x in range(0, 3):
-		#var tile = cardToPull.pop_front()
-		#var instance = tile.instantiate()
-		#instance.TileType = GameTile.TILE_TYPE.SHOP_TILE
-		#$Tiles.add_child(instance)
-		#instance.SceneRef = tile
-		#var slot = $GridContainer.GetNextOpenPosition()
-		#if slot:
-			#slot.Occupy(instance)
-			#instance.TileFinishedResolving.connect(OnTileFinishedResolving)
+	PopulateTiles()	
 
 func SpawnCard(cardPools, slotChances):
 	var rarity = GameTile.TILE_RARITY.COMMON
@@ -99,9 +98,24 @@ func SpawnCard(cardPools, slotChances):
 func OnTileFinishedResolving(_tileScene):
 	ShopComplete.emit()
 	Cleanup()
+	$CanvasLayer.visible = false
 	
 	
 func Cleanup():
 	for x in $Tiles.get_children():
 		x.queue_free()
-	await get_tree().process_frame 
+	await get_tree().create_timer(.25).timeout
+
+func UpdateReroll():
+	
+	$CanvasLayer/Button.disabled = Finder.GetGame().CanAfford(RerollAmount) == false
+	$CanvasLayer/Button/MoneyUI.Update(RerollAmount, $CanvasLayer/Button.disabled == false)
+func _on_button_button_up() -> void:
+	$CanvasLayer/Button.release_focus()
+	$CanvasLayer/Button.disabled = false
+	Finder.GetGame().RemoveMoney(RerollAmount)
+	await PopulateTiles()
+	RerollAmount += 2
+	UpdateReroll()
+	
+	
