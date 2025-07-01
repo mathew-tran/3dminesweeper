@@ -15,7 +15,7 @@ func DoAction():
 			return
 		tiles.shuffle()
 		var tile = tiles.pop_front()
-		var effect = Helper.CreateEffectParticle(GetOwningTile().global_position, tile.global_position, 10)
+		var effect = Helper.CreateEffectParticle(GetOwningTile().global_position, tile.global_position, 10, CustomPathToEffect.EFFECT_COLOR.YELLOW)
 		await effect.DestinationComplete
 		await tile.RevealTile()
 		await tile.MoveTileToSlot()

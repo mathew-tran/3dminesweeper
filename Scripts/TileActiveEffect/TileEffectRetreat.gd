@@ -34,7 +34,7 @@ func DoAction():
 		fieldTiles.shuffle()
 		var fieldTile = fieldTiles.pop_front()
 		print("discarding a tile: " + fieldTile.TileTitle)
-		var effect = Helper.CreateEffectParticle(GetOwningTile().global_position, fieldTile.global_position, 10)
+		var effect = Helper.CreateEffectParticle(GetOwningTile().global_position, fieldTile.global_position, 5, CustomPathToEffect.EFFECT_COLOR.BLACK)
 		await effect.DestinationComplete
 		await fieldTile.PushToGraveyard()
 		Finder.GetGame().OnDiscardTile.emit()

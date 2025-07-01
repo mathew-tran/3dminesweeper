@@ -115,6 +115,7 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 		
 		if TileType == TILE_TYPE.GAME_TILE and Finder.GetGame().CanPlayTiles():
 			#print(name + " clicked")
+			CurrentState = TILE_STATE.FLIPPED
 			Finder.GetGame().PlayTile()		
 			Finder.GetGame().SetGameState(Game.GAME_STATE.RESOLVING)	
 			var tileStatebeforeReveal = TileVisibility
@@ -130,16 +131,17 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 				Finder.GetGame().OnTilePlayed.emit(GameTile.FIELD_TILE_TYPE.HIDDEN)
 			await Finder.GetGame().CompleteActions()
 			await get_tree().create_timer(.35).timeout
-			
+			await PushToGraveyard()
 			if Finder.GetEnemy().IsAlive():
 				if Finder.GetGame().CanPlayExtraTurn():
 						Finder.GetGame().SetGameState(Game.GAME_STATE.CAN_PLAY_TILES)
 				else:
 					Finder.GetGame().SetGameState(Game.GAME_STATE.ENEMY_TURN)
 			else:
-				Finder.GetGame().SetGameState(Game.GAME_STATE.SHOP	)
+				Finder.GetEnemy().BroadcastKilled()
+				
 			
-			await PushToGraveyard()
+			
 			
 		elif TileType == TILE_TYPE.SHOP_TILE:
 			var tween = get_tree().create_tween()
@@ -159,7 +161,7 @@ func DoEffect():
 	
 	var tween = get_tree().create_tween()
 	tween = get_tree().create_tween()
-	tween.tween_property(self, "global_position", global_position - Vector3(0,0,.01), .1)
+	tween.tween_property(self, "global_position", global_position - Vector3(0,0,.01), .2)
 	tween.tween_property(self, "rotation_degrees", rotation_degrees + Vector3(90,0,0), speed)
 	tween.tween_property(self, "global_position", OriginalPosition + Vector3(0,.05,0), .1)
 	await tween.finished
@@ -180,8 +182,8 @@ func RevealTile():
 	var tween = get_tree().create_tween()
 	var offsetVector = Vector3(0,.01,0)
 	
-	tween.tween_property(self, "rotation_degrees", Vector3(180, 180, 0), .2)
-	tween.tween_property(self, "global_position", global_position + offsetVector, .1)
+	tween.tween_property(self, "rotation_degrees", Vector3(180, 180, 0), .1)
+	tween.tween_property(self, "global_position", global_position + offsetVector, .05)
 	TileVisibility = TILE_VISIBILITY.REVEALED
 	await tween.finished
 	
@@ -189,7 +191,6 @@ func MoveTileToSlot():
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "global_position", OriginalPosition + Vector3(0,.001,0), .1)
 	await tween.finished
-	await get_tree().create_timer(.1).timeout
 	
 	
 func IsFlipped():

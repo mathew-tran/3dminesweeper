@@ -122,9 +122,12 @@ func OnTileFinishedResolving(_tileScene):
 	
 	
 func Cleanup():
+	await get_tree().process_frame
 	for x in $Tiles.get_children():
+		var tween = get_tree().create_tween()
+		tween.tween_property(x, "scale", Vector3.ZERO, .1)
+		await tween.finished
 		x.queue_free()
-	await get_tree().create_timer(.25).timeout
 
 func UpdateReroll():
 	RerollButton.SetRerollAmount(RerollAmount)

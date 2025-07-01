@@ -7,6 +7,7 @@ class_name Game
 
 signal PlayerPlayedTile
 signal DeckUpdate
+signal GraveyardUpdate
 
 var Deck = []
 var Graveyard = []
@@ -72,7 +73,7 @@ func AddTiles(cardData : CardData):
 	for x in range(0, cardData.Amount):
 		Deck.append(cardData.Path)
 		
-func AddTilesIfOpen(delay = -1.0, maxDrawAmount = -1, bContinuePhase = true):	
+func AddTilesIfOpen(delay = -1.0, maxDrawAmount = -1):	
 	if delay > 0:
 		await get_tree().create_timer(delay).timeout
 		
@@ -97,23 +98,23 @@ func AddTilesIfOpen(delay = -1.0, maxDrawAmount = -1, bContinuePhase = true):
 				await nextTileSlot.Occupy(instance)
 				instance.TileFinishedResolving.connect(OnTileFinishedResolving)
 				await instance.FlipIfStartReveal()
+				DeckUpdate.emit()
 			else:
 				print("No tile slot to fill! This is a big issue!")
 			await get_tree().process_frame
 			await get_tree().create_timer(.01).timeout
-			DeckUpdate.emit()
+			
 		drawAmount -= 1
-		
-	if bContinuePhase:
-		SetGameState(GAME_STATE.CAN_PLAY_TILES)
 				
 
 
 func PutGraveyardBackToDeck():
 	while Graveyard.size() > 0:
+		var effect = Helper.CreateEffectParticle(Finder.GetGraveyardPreviewSpot().global_position, Finder.GetTilePreviewSpot().global_position, 80, CustomPathToEffect.EFFECT_COLOR.WHITE)
+		await effect.DestinationComplete
 		Deck.push_back(Graveyard.pop_front())
-		await get_tree().create_timer(.04).timeout
 		DeckUpdate.emit()
+		GraveyardUpdate.emit()
 	Deck.shuffle()
 	DeckUpdate.emit()
 	
@@ -145,7 +146,8 @@ func PutTilesBackFromField():
 		Deck.append(tile.SceneRef)
 		var tween = get_tree().create_tween()
 		tween.tween_property(tile, "global_position", Finder.GetTilePreviewSpot().global_position, .1)
-		tween.tween_property(tile, "rotation_degrees", Vector3(0,0, -180), .1)
+		tween.tween_property(tile, "rotation_degrees", Vector3(180,0, -180), .1)
+		tween.tween_property(tile, "scale", Vector3(0,0,0), .2)
 		await tween.finished
 		tile.queue_free()
 		DeckUpdate.emit()
@@ -161,9 +163,9 @@ func OnTileFinishedResolving(tileScene):
 	if get_tree() == null:
 		return
 	Graveyard.push_back(tileScene)
+	GraveyardUpdate.emit()
 	await get_tree().process_frame
 	AddTilesIfOpen(-1, 0)
-	DeckUpdate.emit()
 
 
 func _ready() -> void:
@@ -177,7 +179,10 @@ func _ready() -> void:
 	$HealthComponent.OnTakeDamage.connect(OnTakeDamage)
 	$HealthComponent.OnDeath.connect(OnDeath)
 	$Spawner.MonsterKilled.connect(OnMonsterKilled)
+	DeckUpdate.emit()
+	GraveyardUpdate.emit()
 	await AddTilesIfOpen(.5, 0)
+	SetGameState(GAME_STATE.CAN_PLAY_TILES)
 	#OnMonsterKilled(Finder.GetEnemy())
 
 func OnMoneyUpdate():
@@ -196,6 +201,7 @@ func OnMonsterKilled(enemy):
 	await get_tree().create_timer(1).timeout
 	await PutTilesBackFromField()
 	await PutGraveyardBackToDeck()	
+	await get_tree().create_timer(.25).timeout
 	$Shop.Setup()
 	enemy.queue_free()
 	

@@ -12,9 +12,9 @@ func DoAction():
 		Finder.GetGame().AddAction()
 		var effect = Helper.CreateEffectParticle(GetOwningTile().global_position, enemy.global_position, 10)
 		await effect.DestinationComplete
-		Finder.GetGame().RemoveAction()
-		await get_tree().create_timer(.1).timeout
-		await Finder.GetGame().CompleteActions()
+		Finder.GetGame().RemoveAction()		
 		enemy.TakeDamage(Damage)
+		await Finder.GetGame().CompleteActions()
+		
 		
 	

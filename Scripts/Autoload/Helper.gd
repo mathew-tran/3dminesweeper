@@ -2,10 +2,10 @@ extends Node
 
 @onready var EffectParticle = load("res://Prefabs/Effects/EffectParticle.tscn")
 
-func CreateEffectParticle(startPosition, endPosition, speed) -> CustomPathToEffect:
+func CreateEffectParticle(startPosition, endPosition, speed, color = CustomPathToEffect.EFFECT_COLOR.WHITE) -> CustomPathToEffect:
 	var instance = EffectParticle.instantiate()
 	instance.StartPosition = startPosition
-	instance.Setup(endPosition, speed)
+	instance.Setup(endPosition, speed, color)
 	Finder.GetSpecialEffectsGroup().add_child(instance)
 	return instance
 

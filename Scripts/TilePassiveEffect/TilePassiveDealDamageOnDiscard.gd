@@ -18,4 +18,5 @@ func OnDiscardTile():
 	await effect.DestinationComplete
 	Finder.GetGame().RemoveAction()
 	Finder.GetEnemy().TakeDamage(Amount)
+	await Finder.GetGame().CompleteActions()
 	

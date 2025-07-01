@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d32whd3dals04"]
+
+[resource]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.0253638, 0.0253638, 0.0253638, 1)
+emission_energy_multiplier = 16.0

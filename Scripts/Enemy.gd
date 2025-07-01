@@ -22,6 +22,8 @@ func OnEnemyDeath():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("death")
 	await $AnimationPlayer.animation_finished
+
+func BroadcastKilled():
 	OnDeath.emit(self)
 	
 

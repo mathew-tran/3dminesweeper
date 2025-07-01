@@ -10,5 +10,10 @@ func GetDescription():
 	return string
 	
 func DoAction():
-	await Finder.GetGame().AddTilesIfOpen(.14, DrawAmount, false)
+	var amount = DrawAmount
+	while amount > 0:
+		var effect = Helper.CreateEffectParticle(GetOwningTile().global_position, Finder.GetTilePreviewSpot().global_position, 5, CustomPathToEffect.EFFECT_COLOR.WHITE)
+		await effect.DestinationComplete
+		await Finder.GetGame().AddTilesIfOpen(.14, 1)
+		amount -= 1
 	

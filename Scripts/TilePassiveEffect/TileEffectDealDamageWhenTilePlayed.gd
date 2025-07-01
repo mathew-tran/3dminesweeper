@@ -26,6 +26,8 @@ func OnTilePlayed(vis : GameTile.FIELD_TILE_TYPE):
 		GetOwningTile().PlaySFX()
 		var effect = Helper.CreateEffectParticle(GetOwningTile().global_position, Finder.GetEnemy().global_position, 10)
 		await effect.DestinationComplete
-		Finder.GetGame().RemoveAction()
+		
 		Finder.GetEnemy().TakeDamage(Amount)
+		Finder.GetGame().RemoveAction()
+		await Finder.GetGame().CompleteActions()
 		
