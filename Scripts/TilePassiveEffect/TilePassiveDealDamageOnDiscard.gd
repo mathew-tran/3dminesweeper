@@ -11,6 +11,11 @@ func _ready() -> void:
 	Finder.GetGame().OnDiscardTile.connect(OnDiscardTile)
 
 func OnDiscardTile():
+	await Finder.GetGame().CompleteActions()
+	Finder.GetGame().AddAction()
+	GetOwningTile().PlaySFX()
 	var effect = Helper.CreateEffectParticle(GetOwningTile().global_position, Finder.GetEnemy().global_position, 10)
 	await effect.DestinationComplete
+	Finder.GetGame().RemoveAction()
 	Finder.GetEnemy().TakeDamage(Amount)
+	

@@ -14,7 +14,7 @@ texture = ExtResource("2_oakvo")
 
 [node name="TileEffectDoDamage" type="Node2D" parent="Effects" index="0"]
 script = ExtResource("3_jkygt")
-Damage = 2
+Damage = 5
 metadata/_custom_type_script = "uid://c6kolmtilbqdq"
 
 [node name="TileEffectHeal" type="Node2D" parent="Effects" index="1"]

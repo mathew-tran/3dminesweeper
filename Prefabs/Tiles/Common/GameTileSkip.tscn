@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://croi21rpasjxq"]
+
+[ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_co228"]
+[ext_resource type="Texture2D" uid="uid://cwss5ec7hc7wx" path="res://Sprites/Redo.png" id="2_bh04y"]
+[ext_resource type="Script" uid="uid://cxme8ni4a2hxu" path="res://Scripts/TileActiveEffect/TileEffectSkipTurn.gd" id="3_jbqy5"]
+
+[node name="GameTile" instance=ExtResource("1_co228")]
+TileTitle = "SKIP"
+
+[node name="Sprite3D" parent="blockbench_export" index="1"]
+texture = ExtResource("2_bh04y")
+
+[node name="TileEffectSkipTurn" type="Node2D" parent="Effects" index="0"]
+script = ExtResource("3_jbqy5")
+metadata/_custom_type_script = "uid://cxme8ni4a2hxu"
+
+[editable path="blockbench_export"]

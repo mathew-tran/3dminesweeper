@@ -6,7 +6,6 @@
 
 [node name="GameTile" instance=ExtResource("1_t7iiu")]
 TileTitle = "HEAL"
-Rarity = 2
 
 [node name="Sprite3D" parent="blockbench_export" index="1"]
 transform = Transform3D(-0.037, -5.58684e-09, 2.44209e-16, 0, -1.61732e-09, -0.037, 5.58684e-09, -0.037, 1.61732e-09, 9.24617e-10, 0.0105764, 0)

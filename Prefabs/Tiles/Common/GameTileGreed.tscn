@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ci8dsep77mky8"]
+
+[ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_4pmyo"]
+[ext_resource type="Texture2D" uid="uid://p6n5o4alkuxd" path="res://Sprites/Greed.png" id="2_4pmyo"]
+[ext_resource type="Script" uid="uid://78ua8iirqqcw" path="res://Scripts/TileActiveEffect/TileEffectDrawCard.gd" id="3_4pmyo"]
+
+[node name="GameTile" instance=ExtResource("1_4pmyo")]
+TileTitle = "GREED"
+bStartRevealed = true
+
+[node name="Sprite3D" parent="blockbench_export" index="1"]
+texture = ExtResource("2_4pmyo")
+
+[node name="TileEffectDrawTile" type="Node2D" parent="Effects" index="0"]
+script = ExtResource("3_4pmyo")
+metadata/_custom_type_script = "uid://78ua8iirqqcw"
+
+[editable path="blockbench_export"]

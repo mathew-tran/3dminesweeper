@@ -3,6 +3,7 @@ extends TileEffect
 class_name TileEffectPlayRevealedCard
 
 @export var RevealedCardAmount = 2
+
 func GetDescription():
 	return "Play upto " + str(RevealedCardAmount) + " revealed cards"
 	

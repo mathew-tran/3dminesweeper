@@ -37,7 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0106317, 0, -0.837637)
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_togfq")
-MaxHealth = 55
+MaxHealth = 100
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.716619, 0.697465, 0, -0.697465, 0.716619, 0, 0, 0)

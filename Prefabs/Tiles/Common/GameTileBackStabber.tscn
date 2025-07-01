@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ykpp5omx36ib"]
+
+[ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_678pn"]
+[ext_resource type="Texture2D" uid="uid://c0o7j057o1sim" path="res://Sprites/Backstabber.png" id="2_p1fxl"]
+[ext_resource type="Script" uid="uid://cj2eopyuatv4k" path="res://Scripts/TileActiveEffect/TileEffectRetreat.gd" id="3_5o0ji"]
+
+[node name="GameTile" instance=ExtResource("1_678pn")]
+TileTitle = "BACK STABBER"
+
+[node name="Sprite3D" parent="blockbench_export" index="1"]
+transform = Transform3D(0.037, 0, 0, 0, -1.61732e-09, 0.037, 0, -0.037, -1.61732e-09, 9.24617e-10, 0.0105764, 0)
+texture = ExtResource("2_p1fxl")
+
+[node name="TileEffectRetreat" type="Node2D" parent="Effects" index="0"]
+script = ExtResource("3_5o0ji")
+DiscardAmount = 1
+TileType = 1
+metadata/_custom_type_script = "uid://cj2eopyuatv4k"
+
+[editable path="blockbench_export"]

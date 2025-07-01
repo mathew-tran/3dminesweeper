@@ -19,6 +19,11 @@ enum TILE_RARITY {
 	RARE, # yellow,
 	LEGENDARY #orange
 }
+enum FIELD_TILE_TYPE {
+	REVEALED,
+	HIDDEN,
+	ANY
+}
 
 enum TILE_VISIBILITY {
 	REVEALED,
@@ -112,22 +117,30 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 			#print(name + " clicked")
 			Finder.GetGame().PlayTile()		
 			Finder.GetGame().SetGameState(Game.GAME_STATE.RESOLVING)	
+			var tileStatebeforeReveal = TileVisibility
+			
 			await RevealTile()
 			
 			await DoEffect()
 			await MoveTileToSlot()
 			
-		
-			await PushToGraveyard()
+			
+			if tileStatebeforeReveal == TILE_VISIBILITY.REVEALED:
+				Finder.GetGame().OnTilePlayed.emit(GameTile.FIELD_TILE_TYPE.REVEALED)
+			else:
+				Finder.GetGame().OnTilePlayed.emit(GameTile.FIELD_TILE_TYPE.HIDDEN)
+			await Finder.GetGame().CompleteActions()
+			await get_tree().create_timer(.35).timeout
+			
 			if Finder.GetEnemy().IsAlive():
 				if Finder.GetGame().CanPlayExtraTurn():
 						Finder.GetGame().SetGameState(Game.GAME_STATE.CAN_PLAY_TILES)
 				else:
 					Finder.GetGame().SetGameState(Game.GAME_STATE.ENEMY_TURN)
 			else:
-				Finder.GetGame().SetGameState(Game.GAME_STATE.CAN_PLAY_TILES)
+				Finder.GetGame().SetGameState(Game.GAME_STATE.SHOP	)
 			
-				
+			await PushToGraveyard()
 			
 		elif TileType == TILE_TYPE.SHOP_TILE:
 			var tween = get_tree().create_tween()
@@ -137,16 +150,19 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 			await PushToGraveyard()
 		
 
-
+func PlaySFX():
+	$blockbench_export/Node/cuboid/GPUParticles3D.emitting = true
+	
 func DoEffect():
 	CurrentState = TILE_STATE.FLIPPED
 	var speed = .1
 	for child in $Effects.get_children():
-		$blockbench_export/Node/cuboid/GPUParticles3D.emitting = true
+		PlaySFX()
 		var tween = get_tree().create_tween()
 		tween.tween_property($blockbench_export, "rotation_degrees", rotation_degrees + Vector3(90,0,0), speed)
 		await tween.finished
 		await child.DoAction()
+		
 				
 func PushToGraveyard():
 	var tween = get_tree().create_tween()

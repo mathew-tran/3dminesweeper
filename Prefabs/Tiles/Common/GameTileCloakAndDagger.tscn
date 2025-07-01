@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvsmqsxx4h1lf"]
+
+[ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_kl7lu"]
+[ext_resource type="Texture2D" uid="uid://bcd1rfvmrkjw5" path="res://Sprites/CloakAndDagger.png" id="2_bnjp4"]
+[ext_resource type="Script" uid="uid://b65cgdnisuqt2" path="res://Scripts/TilePassiveEffect/TileEffectDealDamageWhenTilePlayed.gd" id="2_kl7lu"]
+
+[node name="GameTile" instance=ExtResource("1_kl7lu")]
+TileTitle = "CLOAK AND DAGGER"
+
+[node name="Sprite3D" parent="blockbench_export" index="1"]
+texture = ExtResource("2_bnjp4")
+
+[node name="TileEffectDealDamageOnPlayTile" type="Node2D" parent="Passives" index="0"]
+script = ExtResource("2_kl7lu")
+Amount = 4
+FieldTileType = 1
+metadata/_custom_type_script = "uid://b65cgdnisuqt2"
+
+[editable path="blockbench_export"]

@@ -14,7 +14,7 @@ texture = ExtResource("2_f3ikg")
 
 [node name="TileEffectDealDamageOnDiscardTile" type="Node2D" parent="Passives" index="0"]
 script = ExtResource("3_v5jiw")
-Amount = 3
+Amount = 6
 metadata/_custom_type_script = "uid://7d8bnc5asyd0"
 
 [editable path="blockbench_export"]

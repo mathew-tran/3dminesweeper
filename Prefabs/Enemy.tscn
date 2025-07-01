@@ -115,6 +115,7 @@ light_color = Color(1, 0.0784314, 0, 1)
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_yfbri")
+MaxHealth = 20
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

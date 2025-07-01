@@ -4,19 +4,15 @@ class_name TileEffectRetreat
 
 @export var DiscardAmount = 2
 
-enum TILE_TYPE {
-	REVEALED,
-	HIDDEN,
-	ANY
-}
 
-@export var TileType : TILE_TYPE
+
+@export var TileType : GameTile.FIELD_TILE_TYPE
 func GetDescription():
 	var string = "Discard upto " + str(DiscardAmount)  + " random"
 	match TileType:
-		TILE_TYPE.REVEALED:
+		GameTile.FIELD_TILE_TYPE.REVEALED:
 			string += " revealed"
-		TILE_TYPE.HIDDEN:
+		GameTile.FIELD_TILE_TYPE.HIDDEN:
 			string += " hidden"
 			
 	string += " tiles"
@@ -27,11 +23,11 @@ func DoAction():
 	while amount > 0:
 		var fieldTiles = []
 		match TileType:
-			TILE_TYPE.REVEALED:
+			GameTile.FIELD_TILE_TYPE.REVEALED:
 				fieldTiles = Finder.GetGame().GetRevealedTiles()
-			TILE_TYPE.HIDDEN:
+			GameTile.FIELD_TILE_TYPE.HIDDEN:
 				fieldTiles = Finder.GetGame().GetNonRevealedTiles()
-			TILE_TYPE.ANY:
+			GameTile.FIELD_TILE_TYPE.ANY:
 				fieldTiles = Finder.GetGame().GetFieldTiles()
 		if fieldTiles.size() == 0:
 			return
@@ -42,5 +38,5 @@ func DoAction():
 		await effect.DestinationComplete
 		await fieldTile.PushToGraveyard()
 		Finder.GetGame().OnDiscardTile.emit()
-		await get_tree().create_timer(.2).timeout
+		await Finder.GetGame().CompleteActions()
 		amount -= 1

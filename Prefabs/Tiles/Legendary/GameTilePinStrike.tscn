@@ -18,12 +18,11 @@ metadata/_custom_type_script = "uid://c6kolmtilbqdq"
 
 [node name="TileEffectDoDamage2" type="Node2D" parent="Effects" index="1"]
 script = ExtResource("3_modaw")
-Damage = 1
+Damage = 2
 metadata/_custom_type_script = "uid://c6kolmtilbqdq"
 
 [node name="TileEffectDoDamage3" type="Node2D" parent="Effects" index="2"]
 script = ExtResource("3_modaw")
-Damage = 1
 metadata/_custom_type_script = "uid://c6kolmtilbqdq"
 
 [node name="TileEffectSkipTurn" type="Node2D" parent="Effects" index="3"]
