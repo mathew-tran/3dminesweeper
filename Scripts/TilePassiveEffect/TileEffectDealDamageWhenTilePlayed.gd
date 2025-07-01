@@ -13,7 +13,7 @@ func GetDescription():
 			str += " revealed"
 		GameTile.FIELD_TILE_TYPE.HIDDEN:
 			str += " hidden"
-	str += " tile is played deal " + str(Amount) + " damage to the enemy"
+	str += " tile is played deal " + str(Amount) + " damage"
 	return str
 	
 func _ready() -> void:

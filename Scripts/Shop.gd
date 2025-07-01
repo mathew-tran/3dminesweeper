@@ -117,9 +117,8 @@ func SpawnCard(cardPools, slotChances):
 	return cardPools
 	
 func OnTileFinishedResolving(_tileScene):
-	ShopComplete.emit()
 	Cleanup()
-	$CanvasLayer.visible = false
+
 	
 	
 func Cleanup():
@@ -144,3 +143,6 @@ func Reroll() -> void:
 
 func _on_button_2_button_up() -> void:
 	OnTileFinishedResolving(null)
+	ShopComplete.emit()
+	Cleanup()
+	$CanvasLayer.visible = false

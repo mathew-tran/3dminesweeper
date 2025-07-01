@@ -4,7 +4,7 @@ class_name TileEffectDoDamage
 @export var Damage = 3
 
 func GetDescription():
-	return "Deals " + str(Damage) + " damage to the enemy"
+	return "Deals " + str(Damage) + " damage"
 
 func DoAction():
 	var enemy = Finder.GetEnemy()

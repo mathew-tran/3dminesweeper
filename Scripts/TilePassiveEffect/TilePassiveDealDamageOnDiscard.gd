@@ -5,7 +5,7 @@ class_name TileEffectDealDamageOnDiscardTile
 @export var Amount = 1
 
 func GetDescription():
-	return "When a tile is discarded deal " + str(Amount) + " damage to the enemy"
+	return "When a tile is discarded deal " + str(Amount) + " damage"
 	
 func _ready() -> void:
 	Finder.GetGame().OnDiscardTile.connect(OnDiscardTile)
