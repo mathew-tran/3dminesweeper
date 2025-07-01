@@ -10,6 +10,10 @@ func _ready() -> void:
 	StartPosition = global_position
 	Update()
 	
+func _process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		StartPosition = global_position
+		Update()
 func GetPositions():
 	var positions = []
 	for child in get_children():

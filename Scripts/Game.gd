@@ -112,7 +112,7 @@ func AddTilesIfOpen(delay = -1.0, maxDrawAmount = -1, bContinuePhase = true):
 func PutGraveyardBackToDeck():
 	while Graveyard.size() > 0:
 		Deck.push_back(Graveyard.pop_front())
-		await get_tree().create_timer(.01).timeout
+		await get_tree().create_timer(.04).timeout
 		DeckUpdate.emit()
 	Deck.shuffle()
 	DeckUpdate.emit()
@@ -178,6 +178,7 @@ func _ready() -> void:
 	$HealthComponent.OnDeath.connect(OnDeath)
 	$Spawner.MonsterKilled.connect(OnMonsterKilled)
 	await AddTilesIfOpen(.5, 0)
+	#OnMonsterKilled(Finder.GetEnemy())
 
 func OnMoneyUpdate():
 	$CanvasLayer/MoneyUI.Update(Money)

@@ -10,7 +10,7 @@ func IsAvailable():
 func Occupy(tile : GameTile):
 	TileRef = tile
 	var tween = get_tree().create_tween()
-	tween.tween_property(tile, "global_position",global_position + Vector3(0, .025, 0), .1 )
+	tween.tween_property(tile, "global_position",global_position + Vector3(0, .02, 0), .1 )
 	
 	tile.TileFinishedResolving.connect(OnTileFinishedResolving)
 	await tween.finished

@@ -122,7 +122,6 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 			await RevealTile()
 			
 			await DoEffect()
-			await MoveTileToSlot()
 			
 			
 			if tileStatebeforeReveal == TILE_VISIBILITY.REVEALED:
@@ -154,15 +153,20 @@ func PlaySFX():
 	$blockbench_export/Node/cuboid/GPUParticles3D.emitting = true
 	
 func DoEffect():
+	ShowTileInfo()
 	CurrentState = TILE_STATE.FLIPPED
 	var speed = .1
+	
+	var tween = get_tree().create_tween()
+	tween = get_tree().create_tween()
+	tween.tween_property(self, "global_position", global_position - Vector3(0,0,.01), .1)
+	tween.tween_property(self, "rotation_degrees", rotation_degrees + Vector3(90,0,0), speed)
+	tween.tween_property(self, "global_position", OriginalPosition + Vector3(0,.05,0), .1)
+	await tween.finished
 	for child in $Effects.get_children():
 		PlaySFX()
-		var tween = get_tree().create_tween()
-		tween.tween_property($blockbench_export, "rotation_degrees", rotation_degrees + Vector3(90,0,0), speed)
-		await tween.finished
 		await child.DoAction()
-		
+	Finder.GetInfoPopup().ShowInfo(null)
 				
 func PushToGraveyard():
 	var tween = get_tree().create_tween()
@@ -176,14 +180,14 @@ func RevealTile():
 	var tween = get_tree().create_tween()
 	var offsetVector = Vector3(0,.01,0)
 	
-	tween.tween_property($blockbench_export, "rotation_degrees", Vector3(0, 0, 0), .2)
-	tween.tween_property($blockbench_export, "global_position", global_position + offsetVector, .1)
+	tween.tween_property(self, "rotation_degrees", Vector3(180, 180, 0), .2)
+	tween.tween_property(self, "global_position", global_position + offsetVector, .1)
 	TileVisibility = TILE_VISIBILITY.REVEALED
 	await tween.finished
 	
 func MoveTileToSlot():
 	var tween = get_tree().create_tween()
-	tween.tween_property($blockbench_export, "global_position", OriginalPosition, .1)
+	tween.tween_property(self, "global_position", OriginalPosition + Vector3(0,.001,0), .1)
 	await tween.finished
 	await get_tree().create_timer(.1).timeout
 	
@@ -198,6 +202,8 @@ func DoAction():
 	pass
 	
 func _on_mouse_entered() -> void:
+	if Finder.GetGame().CurrentState == Game.GAME_STATE.RESOLVING:
+		return
 	if CurrentState != TILE_STATE.UNCLICKABLE:
 		$blockbench_export/Node/cuboid.material_override = load("res://Shaders/GameTileHighlight.tres")
 	if TileType == TILE_TYPE.SHOP_TILE or TileVisibility == TILE_VISIBILITY.REVEALED:
@@ -218,6 +224,8 @@ func ShowTileInfo():
 		Finder.GetInfoPopup().ShowInfo(data)
 
 func _on_mouse_exited() -> void:
+	if Finder.GetGame().CurrentState == Game.GAME_STATE.RESOLVING:
+		return
 	if CurrentState != TILE_STATE.UNCLICKABLE:
 		$blockbench_export/Node/cuboid.material_override = null
 	

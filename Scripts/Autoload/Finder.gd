@@ -6,6 +6,12 @@ func GetGame() -> Game:
 		return result[0]
 	return null
 	
+func GetShop() -> Shop:
+	var result = get_tree().get_nodes_in_group("Shop")
+	if result:
+		return result[0]
+	return null
+	
 func GetEnemy() -> Enemy:
 	var result = get_tree().get_nodes_in_group("Enemy")
 	if result:

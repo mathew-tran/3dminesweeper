@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://d4mii6lwdp60y"]
+
+[ext_resource type="Script" uid="uid://c7g870fqynqd5" path="res://Scripts/3DRerollButton.gd" id="1_kq4qh"]
+[ext_resource type="FontFile" uid="uid://divkrdi6k24pj" path="res://Fonts/Saira/static/Saira_Expanded-Bold.ttf" id="2_e1s8m"]
+[ext_resource type="PackedScene" uid="uid://dgf56ndysg1x1" path="res://Prefabs/UI/MoneyUI.tscn" id="3_g64i5"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kq4qh"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e1s8m"]
+size = Vector3(5.21507, 1.62112, 0.141113)
+
+[sub_resource type="BoxMesh" id="BoxMesh_e1s8m"]
+size = Vector3(5.3, 1.3, 0.445)
+
+[node name="RerollButton" type="StaticBody3D"]
+transform = Transform3D(0.065, 0, 0, 0, -2.84124e-09, 0.065, 0, -0.065, -2.84124e-09, 0, 0, 0)
+script = ExtResource("1_kq4qh")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.521641)
+texture_filter = 2
+texture = SubResource("ViewportTexture_kq4qh")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+transparent_bg = true
+handle_input_locally = false
+vrs_update_mode = 2
+gui_embed_subwindows = true
+size = Vector2i(520, 154)
+
+[node name="Label" type="Label" parent="Sprite3D/SubViewport"]
+offset_left = 1.5
+offset_top = 2.0
+offset_right = 518.5
+offset_bottom = 75.0
+theme_override_fonts/font = ExtResource("2_e1s8m")
+theme_override_font_sizes/font_size = 30
+text = "REROLL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoneyUI" parent="Sprite3D/SubViewport" instance=ExtResource("3_g64i5")]
+offset_left = 190.5
+offset_top = 59.0
+offset_right = 385.5
+offset_bottom = 187.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 2.4869e-14, 0, -2.4869e-14, 1, -0.0294723, -0.0175019, 0.429444)
+shape = SubResource("BoxShape3D_e1s8m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.234346)
+mesh = SubResource("BoxMesh_e1s8m")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

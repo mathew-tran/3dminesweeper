@@ -1,9 +1,13 @@
 extends Node3D
 
+class_name Shop
+
 @export var CardPoolsCommon : CardPoolData
 @export var CardPoolsUncommon : CardPoolData
 @export var CardPoolsRare : CardPoolData
 @export var CardPoolsLegendary : CardPoolData
+
+@onready var RerollButton = $RerollButton
 
 signal ShopComplete
 
@@ -28,6 +32,8 @@ var thirdSlotData = {
 var RerollAmount = 3
 var DefaultRerollAmount = 3
 
+func _ready() -> void:
+	Setup()
 func PopulateTiles():
 	await Cleanup()
 	var cardPools = []
@@ -121,18 +127,16 @@ func Cleanup():
 	await get_tree().create_timer(.25).timeout
 
 func UpdateReroll():
+	RerollButton.Update(RerollAmount)
 	
-	$CanvasLayer/Button.disabled = Finder.GetGame().CanAfford(RerollAmount) == false
-	$CanvasLayer/Button/MoneyUI.Update(RerollAmount, $CanvasLayer/Button.disabled == false)
-func _on_button_button_up() -> void:
-	$CanvasLayer/Button.release_focus()
-	$CanvasLayer/Button.disabled = false
-	$CanvasLayer/Button.visible = false
-	Finder.GetGame().RemoveMoney(RerollAmount)
-	await PopulateTiles()
-	RerollAmount += 2
-	UpdateReroll()
-	$CanvasLayer/Button.visible = true
+func Reroll() -> void:
+	if Finder.GetGame().CanAfford(RerollAmount) and RerollButton.visible:
+		RerollButton.visible = false
+		Finder.GetGame().RemoveMoney(RerollAmount)
+		await PopulateTiles()
+		RerollAmount += 2
+		UpdateReroll()
+		RerollButton.visible = true
 	
 	
 

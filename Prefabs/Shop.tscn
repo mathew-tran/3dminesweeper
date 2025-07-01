@@ -8,10 +8,11 @@
 [ext_resource type="Resource" uid="uid://du17xcctl366x" path="res://Content/CardPools/CardPoolData_Uncommon.tres" id="3_cetby"]
 [ext_resource type="Resource" uid="uid://vta4ddbs5m7v" path="res://Content/CardPools/CardPoolData_Rare.tres" id="4_bgph2"]
 [ext_resource type="Resource" uid="uid://cao86qqufmyjh" path="res://Content/CardPools/CardPoolData_Legendary.tres" id="5_uixlw"]
-[ext_resource type="PackedScene" uid="uid://dgf56ndysg1x1" path="res://Prefabs/UI/MoneyUI.tscn" id="8_bgph2"]
+[ext_resource type="PackedScene" uid="uid://d4mii6lwdp60y" path="res://Prefabs/3DRerollButton.tscn" id="8_uixlw"]
 [ext_resource type="FontFile" uid="uid://divkrdi6k24pj" path="res://Fonts/Saira/static/Saira_Expanded-Bold.ttf" id="8_vgb8g"]
 
-[node name="Shop" type="Node3D"]
+[node name="Shop" type="Node3D" groups=["Shop"]]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_pu482")
 CardPoolsCommon = ExtResource("2_0y0u7")
 CardPoolsUncommon = ExtResource("3_cetby")
@@ -20,66 +21,38 @@ CardPoolsLegendary = ExtResource("5_uixlw")
 
 [node name="blockbench_export" parent="." instance=ExtResource("1_wubrc")]
 
-[node name="GridContainer" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00478539, 0.0653641, 0.0145411)
-visible = false
-script = ExtResource("2_pu482")
-tileSize = Vector3(-0.265, 0, 0.07)
-perRow = 3
-
-[node name="TileSlot2" parent="GridContainer" instance=ExtResource("3_0y0u7")]
-transform = Transform3D(1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, 0.265, 0, 0)
-
-[node name="TileSlot3" parent="GridContainer" instance=ExtResource("3_0y0u7")]
-transform = Transform3D(1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, -1.39698e-09, 0, 0)
-
-[node name="TileSlot4" parent="GridContainer" instance=ExtResource("3_0y0u7")]
-transform = Transform3D(1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, -0.265, 0, 0)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.391635, -0.0401392)
-
-[node name="Tiles" type="Node3D" parent="."]
-
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, 0.2, 0, -0.2, -8.74228e-09, 0.00668335, 0.155548, -0.120807)
+transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, 0.2, 0, -0.2, -8.74228e-09, -0.200253, 0.0731633, -0.120807)
 text = "Pick a tile"
 font = ExtResource("8_vgb8g")
 
+[node name="RerollButton" parent="." instance=ExtResource("8_uixlw")]
+transform = Transform3D(0.065, 0, 0, 0, -2.84124e-09, 0.065, 0, -0.065, -2.84124e-09, -0.22071, 0.0642343, 0.0358741)
+
+[node name="GridContainer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.215651, 0.0593104, -0.0559081)
+script = ExtResource("2_pu482")
+tileSize = Vector3(0.07, 0, 0.07)
+perRow = 3
+
+[node name="TileSlot2" parent="GridContainer" instance=ExtResource("3_0y0u7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07, 0, 0)
+
+[node name="TileSlot3" parent="GridContainer" instance=ExtResource("3_0y0u7")]
+
+[node name="TileSlot4" parent="GridContainer" instance=ExtResource("3_0y0u7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.00702491, 0.391635, 0.00851724)
+projection = 1
+size = 0.559
+
+[node name="Tiles" type="Node3D" parent="."]
+
 [node name="TileSpawnPosition" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.531303)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="Button" type="Button" parent="CanvasLayer"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -258.5
-offset_top = -152.0
-offset_right = 258.5
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="Label" type="Label" parent="CanvasLayer/Button"]
-layout_mode = 0
-offset_right = 517.0
-offset_bottom = 73.0
-theme_override_fonts/font = ExtResource("8_vgb8g")
-theme_override_font_sizes/font_size = 30
-text = "REROLL"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MoneyUI" parent="CanvasLayer/Button" instance=ExtResource("8_bgph2")]
-layout_mode = 0
-offset_left = 189.0
-offset_top = 57.0
-offset_right = 378.0
-offset_bottom = 185.0
 
 [node name="Button2" type="Button" parent="CanvasLayer"]
 anchors_preset = 3
@@ -103,5 +76,4 @@ text = "SKIP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="button_up" from="CanvasLayer/Button" to="." method="_on_button_button_up"]
 [connection signal="button_up" from="CanvasLayer/Button2" to="." method="_on_button_2_button_up"]
