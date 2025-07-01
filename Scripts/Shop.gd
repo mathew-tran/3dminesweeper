@@ -34,6 +34,7 @@ var DefaultRerollAmount = 3
 
 func _ready() -> void:
 	$CanvasLayer.visible = false
+	Finder.GetInfoPopup().ShowInfo(null)
 	
 func PopulateTiles():
 	await Cleanup()
@@ -67,9 +68,11 @@ func PopulateTiles():
 	cardPools.append(unCommonCards)
 	cardPools.append(rareCards)
 	cardPools.append(legendaryCards)
-	cardPools = SpawnCard(cardPools, thirdSlotData)	
-	cardPools = SpawnCard(cardPools, secondSlotData)
 	cardPools = SpawnCard(cardPools, firstSlotData)
+	cardPools = SpawnCard(cardPools, secondSlotData)
+	cardPools = SpawnCard(cardPools, thirdSlotData)	
+	
+	
 	await get_tree().create_timer(.25).timeout
 	
 func Setup():

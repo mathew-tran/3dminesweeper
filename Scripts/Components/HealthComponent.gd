@@ -38,14 +38,12 @@ func Heal(amount):
 	OnTakeDamage.emit(0)
 	
 func TakeDamage(amount):
-	if CurrentState == STATE.DEAD:
-		return
-		
-
 	CurrentHealth -= amount
 	OnTakeDamage.emit(amount)
 	
 	if CurrentHealth <= 0:
+		if CurrentState == STATE.DEAD:
+			return
 		OnDeath.emit()
 		CurrentState = STATE.DEAD
 	
