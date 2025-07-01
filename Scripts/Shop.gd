@@ -127,6 +127,7 @@ func Cleanup():
 	await get_tree().create_timer(.25).timeout
 
 func UpdateReroll():
+	RerollButton.SetRerollAmount(RerollAmount)
 	RerollButton.Update(RerollAmount)
 	
 func Reroll() -> void:

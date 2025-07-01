@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://cd44hpat3x50p"]
+
+[ext_resource type="Script" uid="uid://7agnyfxwrci2" path="res://Scripts/UI/3DTotemButton.gd" id="1_u87k6"]
+[ext_resource type="Texture2D" uid="uid://dscvqg2mql8s2" path="res://Sprites/Totems/GreaterHealth.png" id="2_u87k6"]
+[ext_resource type="PackedScene" uid="uid://dgf56ndysg1x1" path="res://Prefabs/UI/MoneyUI.tscn" id="3_mcx3o"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kq4qh"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e1s8m"]
+size = Vector3(5.21507, 1.62112, 0.141113)
+
+[sub_resource type="BoxMesh" id="BoxMesh_e1s8m"]
+size = Vector3(5.3, 1.3, 0.445)
+
+[node name="3DTotemButton" type="StaticBody3D"]
+transform = Transform3D(0.065, 0, 0, 0, -2.84124e-09, 0.065, 0, -0.065, -2.84124e-09, 0, 0, 0)
+script = ExtResource("1_u87k6")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.521641)
+texture_filter = 2
+texture = SubResource("ViewportTexture_kq4qh")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+transparent_bg = true
+handle_input_locally = false
+vrs_update_mode = 2
+gui_embed_subwindows = true
+size = Vector2i(520, 154)
+
+[node name="Control" type="Control" parent="Sprite3D/SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Image" type="TextureRect" parent="Sprite3D/SubViewport/Control"]
+layout_mode = 0
+offset_left = 1.5
+offset_top = -20.915
+offset_right = 518.5
+offset_bottom = 52.085
+texture = ExtResource("2_u87k6")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="MoneyUI" parent="Sprite3D/SubViewport/Control" instance=ExtResource("3_mcx3o")]
+layout_mode = 0
+offset_left = 190.5
+offset_top = 59.0
+offset_right = 385.5
+offset_bottom = 187.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.325, 0, 0, 0, 1.36, 2.4869e-14, 0, -3.55271e-14, 1, -0.0294723, 0.166891, 0.429444)
+shape = SubResource("BoxShape3D_e1s8m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.325, 0, 0, 0, 1.36, 3.55271e-15, 0, 0, 1, 0, 0.184393, 0.234346)
+mesh = SubResource("BoxMesh_e1s8m")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

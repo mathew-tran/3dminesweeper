@@ -22,7 +22,6 @@ func OnEnemyDeath():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("death")
 	await $AnimationPlayer.animation_finished
-	await Finder.GetGame().CurrentState == Game.GAME_STATE.CAN_PLAY_TILES
 	OnDeath.emit(self)
 	
 

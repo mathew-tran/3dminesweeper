@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://gd3r1d53rlhj"]
+
+[ext_resource type="Texture2D" uid="uid://dscvqg2mql8s2" path="res://Sprites/Totems/GreaterHealth.png" id="1_x2njj"]
+[ext_resource type="Script" uid="uid://mnr6ke2j5vhb" path="res://Scripts/UI/TotemUI.gd" id="2_2pmwx"]
+[ext_resource type="Script" uid="uid://8erbyqi3xwro" path="res://Scripts/Totem/TotemBase.gd" id="3_cwuub"]
+[ext_resource type="Texture2D" uid="uid://c0o7j057o1sim" path="res://Sprites/Backstabber.png" id="4_yngeg"]
+
+[node name="TotemUI" type="TextureRect" node_paths=PackedStringArray("TotemRef")]
+custom_minimum_size = Vector2(60, 60)
+texture = ExtResource("1_x2njj")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("2_2pmwx")
+TotemRef = NodePath("TotemBase")
+
+[node name="TotemBase" type="Node" parent="."]
+script = ExtResource("3_cwuub")
+TotemImage = ExtResource("4_yngeg")
+TotemTitle = "SPECIAL TOTEM"
+metadata/_custom_type_script = "uid://8erbyqi3xwro"
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

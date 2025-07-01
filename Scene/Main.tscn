@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bsuec0fj58hik"]
+[gd_scene load_steps=21 format=3 uid="uid://bsuec0fj58hik"]
 
 [ext_resource type="Script" uid="uid://beilse1b132e6" path="res://Scripts/Game.gd" id="1_h175a"]
 [ext_resource type="Resource" uid="uid://b4itrbxtgu4o" path="res://Content/Decks/DeckData_Basic.tres" id="2_hueuk"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dgf56ndysg1x1" path="res://Prefabs/UI/MoneyUI.tscn" id="7_gclda"]
 [ext_resource type="Script" uid="uid://dqyg5mns7ccw7" path="res://Scripts/Editor/ToolTileGridContainer.gd" id="7_hueuk"]
 [ext_resource type="PackedScene" uid="uid://x276p6483jes" path="res://Prefabs/TileSlot.tscn" id="8_hueuk"]
+[ext_resource type="PackedScene" uid="uid://gd3r1d53rlhj" path="res://Prefabs/UI/TotemUI.tscn" id="8_kp1vv"]
 [ext_resource type="PackedScene" uid="uid://c57vx16ukfuxw" path="res://Prefabs/TilePreview.tscn" id="9_6a8me"]
 [ext_resource type="PackedScene" uid="uid://bittp5og84ajb" path="res://Prefabs/GraveyardPreview.tscn" id="9_yg4ot"]
 [ext_resource type="PackedScene" uid="uid://b2ll27us1m10f" path="res://Prefabs/Shop.tscn" id="11_vm4ek"]
@@ -51,6 +52,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.092492, -0.421679)
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.298062, 0.191825)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="GridContainer" parent="CanvasLayer"]
+offset_right = 149.0
+offset_bottom = 550.0
+columns = 2
+
+[node name="TotemUI" parent="CanvasLayer/HBoxContainer" instance=ExtResource("8_kp1vv")]
+layout_mode = 2
 
 [node name="InfoPopup" parent="CanvasLayer" instance=ExtResource("6_4qtod")]
 visible = false
