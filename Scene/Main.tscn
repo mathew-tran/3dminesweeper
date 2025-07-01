@@ -56,6 +56,12 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 visible = false
 
 [node name="MoneyUI" parent="CanvasLayer" instance=ExtResource("7_gclda")]
+offset_left = -29.0
+offset_top = 537.0
+offset_right = 171.0
+offset_bottom = 665.0
+pivot_offset = Vector2(100, 64)
+bIsGameUI = true
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, 0.0707107, 0.0707107, 0, -0.0707107, 0.0707107, -2.81283e-09, -0.0630492, 0.113803)

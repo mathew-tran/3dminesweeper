@@ -16,7 +16,8 @@ enum TILE_TYPE {
 enum TILE_RARITY {
 	COMMON, # white
 	UNCOMMON, # blue 
-	RARE # yello
+	RARE, # yellow,
+	LEGENDARY #orange
 }
 
 enum TILE_VISIBILITY {
@@ -41,12 +42,14 @@ var OriginalPosition = Vector2.ZERO
 
 @export var bStartRevealed = false
 
-@export var Rarity : TILE_RARITY
+var Rarity : TILE_RARITY
 
 func GetDescription():
 	var description = ""
 	if bStartRevealed:
 		description += "Starts Revealed\n"
+	for effect in $Passives.get_children():
+		description += effect.GetDescription() +"\n"
 	for effect in $Effects.get_children():
 		description += effect.GetDescription() +"\n"
 	return description
@@ -54,7 +57,20 @@ func GetDescription():
 func GetTitle():
 	return TileTitle
 	
+func DetermineRarity():
+	var path = scene_file_path
+	if path.contains("Rare"):
+		Rarity = TILE_RARITY.RARE
+	if path.contains("Common"):
+		Rarity = TILE_RARITY.COMMON
+	if path.contains("Legendary"):
+		Rarity = TILE_RARITY.LEGENDARY
+	if path.contains("Uncommon"):
+		Rarity = TILE_RARITY.UNCOMMON
+		
 func _ready() -> void:
+	print(scene_file_path)
+	DetermineRarity()
 	if TileType == TILE_TYPE.SHOP_TILE:
 		$blockbench_export.rotation_degrees = Vector3.ZERO
 		
@@ -65,15 +81,17 @@ func _ready() -> void:
 			rarityMaterial = load("res://Materials/MATERIAL_UNCOMMON.tres")
 		TILE_RARITY.RARE:
 			rarityMaterial = load("res://Materials/MATERIAL_RARE.tres")
-	
+		TILE_RARITY.LEGENDARY:
+			rarityMaterial = load("res://Materials/MATERIAL_LEGENDARY.tres")
 	$blockbench_export/Node/cuboid/CSGMesh3D.material = rarityMaterial
 	
-	await get_tree().create_timer(.2).timeout
-	if bStartRevealed:
-		await RevealTile()
-		Finder.GetInfoPopup().ShowInfo(null)
+	
 		
-		
+func FlipIfStartReveal():
+	if TileType == TILE_TYPE.GAME_TILE:
+		if bStartRevealed:
+			await RevealTile()
+	
 func SetOriginalPosition():
 	OriginalPosition = global_position
 	
@@ -145,7 +163,6 @@ func RevealTile():
 	tween.tween_property($blockbench_export, "rotation_degrees", Vector3(0, 0, 0), .2)
 	tween.tween_property($blockbench_export, "global_position", global_position + offsetVector, .1)
 	TileVisibility = TILE_VISIBILITY.REVEALED
-	ShowTileInfo()
 	await tween.finished
 	
 func MoveTileToSlot():
@@ -153,7 +170,6 @@ func MoveTileToSlot():
 	tween.tween_property($blockbench_export, "global_position", OriginalPosition, .1)
 	await tween.finished
 	await get_tree().create_timer(.1).timeout
-	Finder.GetInfoPopup().ShowInfo(null)
 	
 	
 func IsFlipped():

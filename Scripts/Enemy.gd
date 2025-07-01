@@ -40,7 +40,8 @@ func OnStateUpdate(state : Game.GAME_STATE):
 			Helper.CreateEffectParticle(global_position, Finder.GetGame().GetPlayerPosition(), 4)
 			await $AnimationPlayer.animation_finished
 			Finder.GetGame().TakeDamage(5)
-			Finder.GetGame().SetGameState(Game.GAME_STATE.CAN_PLAY_TILES)
+			if Finder.GetGame():
+				Finder.GetGame().SetGameState(Game.GAME_STATE.CAN_PLAY_TILES)
 	if state == Game.GAME_STATE.SHOP:
 		var tween = get_tree().create_tween()
 		tween.tween_property(self, "scale", Vector3.ZERO, .2)

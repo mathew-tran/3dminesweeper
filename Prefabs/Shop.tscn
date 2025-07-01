@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b2ll27us1m10f"]
+[gd_scene load_steps=11 format=3 uid="uid://b2ll27us1m10f"]
 
 [ext_resource type="Script" uid="uid://dokd7dv47iv73" path="res://Scripts/Shop.gd" id="1_pu482"]
 [ext_resource type="PackedScene" uid="uid://dn3eh371dddi7" path="res://Models/Shop/Shop.gltf" id="1_wubrc"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://x276p6483jes" path="res://Prefabs/TileSlot.tscn" id="3_0y0u7"]
 [ext_resource type="Resource" uid="uid://du17xcctl366x" path="res://Content/CardPools/CardPoolData_Uncommon.tres" id="3_cetby"]
 [ext_resource type="Resource" uid="uid://vta4ddbs5m7v" path="res://Content/CardPools/CardPoolData_Rare.tres" id="4_bgph2"]
+[ext_resource type="Resource" uid="uid://cao86qqufmyjh" path="res://Content/CardPools/CardPoolData_Legendary.tres" id="5_uixlw"]
 [ext_resource type="PackedScene" uid="uid://dgf56ndysg1x1" path="res://Prefabs/UI/MoneyUI.tscn" id="8_bgph2"]
 [ext_resource type="FontFile" uid="uid://divkrdi6k24pj" path="res://Fonts/Saira/static/Saira_Expanded-Bold.ttf" id="8_vgb8g"]
 
@@ -15,6 +16,7 @@ script = ExtResource("1_pu482")
 CardPoolsCommon = ExtResource("2_0y0u7")
 CardPoolsUncommon = ExtResource("3_cetby")
 CardPoolsRare = ExtResource("4_bgph2")
+CardPoolsLegendary = ExtResource("5_uixlw")
 
 [node name="blockbench_export" parent="." instance=ExtResource("1_wubrc")]
 
@@ -79,4 +81,27 @@ offset_top = 57.0
 offset_right = 378.0
 offset_bottom = 185.0
 
+[node name="Button2" type="Button" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -152.0
+grow_horizontal = 0
+grow_vertical = 0
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/Button2"]
+layout_mode = 0
+offset_right = 201.0
+offset_bottom = 151.0
+theme_override_fonts/font = ExtResource("8_vgb8g")
+theme_override_font_sizes/font_size = 30
+text = "SKIP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="button_up" from="CanvasLayer/Button" to="." method="_on_button_button_up"]
+[connection signal="button_up" from="CanvasLayer/Button2" to="." method="_on_button_2_button_up"]

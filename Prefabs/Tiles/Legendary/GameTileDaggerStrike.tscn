@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj1a54urbam28"]
+
+[ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_trjh5"]
+[ext_resource type="Texture2D" uid="uid://bn048ejt7faot" path="res://Sprites/DaggerStrike.png" id="2_f3ikg"]
+[ext_resource type="Script" uid="uid://7d8bnc5asyd0" path="res://Scripts/TilePassiveEffect/TilePassiveDealDamageOnDiscard.gd" id="3_v5jiw"]
+
+[node name="GameTile" instance=ExtResource("1_trjh5")]
+TileTitle = "DAGGER STRIKE"
+bStartRevealed = true
+
+[node name="Sprite3D" parent="blockbench_export" index="1"]
+transform = Transform3D(0.037, 0, 0, 0, -1.61732e-09, 0.037, 0, -0.037, -1.61732e-09, 9.24617e-10, 0.0105764, 0)
+texture = ExtResource("2_f3ikg")
+
+[node name="TileEffectDealDamageOnDiscardTile" type="Node2D" parent="Passives" index="0"]
+script = ExtResource("3_v5jiw")
+Amount = 3
+metadata/_custom_type_script = "uid://7d8bnc5asyd0"
+
+[editable path="blockbench_export"]

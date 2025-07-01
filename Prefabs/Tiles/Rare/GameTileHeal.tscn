@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_t7iiu"]
 [ext_resource type="Texture2D" uid="uid://difyytdyd1dj0" path="res://Sprites/Heal.png" id="2_v7jq8"]
-[ext_resource type="Script" uid="uid://ccqhmloqjbnyh" path="res://Scripts/TileEffect/TileEffectHeal.gd" id="3_ih1p0"]
+[ext_resource type="Script" uid="uid://ccqhmloqjbnyh" path="res://Scripts/TileActiveEffect/TileEffectHeal.gd" id="3_ih1p0"]
 
 [node name="GameTile" instance=ExtResource("1_t7iiu")]
 TileTitle = "HEAL"

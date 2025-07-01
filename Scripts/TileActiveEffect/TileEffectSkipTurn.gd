@@ -3,7 +3,7 @@ extends TileEffect
 class_name TileEffectSkipTurn
 
 func GetDescription():
-	return "Enemy will not attack after flipping this tile"
+	return "Gain an extra turn"
 	
 func DoAction():
 	Finder.GetGame().SkipTurn()

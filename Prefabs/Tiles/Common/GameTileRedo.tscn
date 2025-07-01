@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_msmni"]
 [ext_resource type="Texture2D" uid="uid://cwss5ec7hc7wx" path="res://Sprites/Redo.png" id="2_nb5md"]
-[ext_resource type="Script" uid="uid://cxme8ni4a2hxu" path="res://Scripts/TileEffect/TileEffectSkipTurn.gd" id="3_bkpan"]
+[ext_resource type="Script" uid="uid://cxme8ni4a2hxu" path="res://Scripts/TileActiveEffect/TileEffectSkipTurn.gd" id="3_bkpan"]
 
 [node name="GameTile" instance=ExtResource("1_msmni")]
 TileTitle = "SKIP"

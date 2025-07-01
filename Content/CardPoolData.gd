@@ -2,4 +2,7 @@ extends Resource
 
 class_name CardPoolData
 
-@export var Tiles : Array[PackedScene]
+@export_dir var TilesDirectory
+
+func GetTiles():
+	return Helper.GetAllFilePaths(TilesDirectory)

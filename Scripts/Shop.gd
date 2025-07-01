@@ -3,23 +3,27 @@ extends Node3D
 @export var CardPoolsCommon : CardPoolData
 @export var CardPoolsUncommon : CardPoolData
 @export var CardPoolsRare : CardPoolData
+@export var CardPoolsLegendary : CardPoolData
 
 signal ShopComplete
 
 var firstSlotData = {
 	"common" : 75,
 	"uncommon" : 20,
-	"rare" : 5,
+	"rare" : 4,
+	"legendary" : 1
 }
 var secondSlotData = {
 	"common" : 50,
 	"uncommon" : 40,
-	"rare" : 10,
+	"rare" : 8,
+	"legendary" : 2
 }
 var thirdSlotData = {
-	"common" : 10,
-	"uncommon" : 70,
-	"rare" : 20,
+	"common" : 45,
+	"uncommon" : 40,
+	"rare" : 10,
+	"legendary" : 5,
 }
 var RerollAmount = 3
 var DefaultRerollAmount = 3
@@ -30,24 +34,29 @@ func PopulateTiles():
 	var commonCards = []
 	var unCommonCards = []
 	var rareCards = []
+	var legendaryCards = []
 	
-	for x in CardPoolsCommon.Tiles:
+	for x in CardPoolsCommon.GetTiles():
 		commonCards.append(x)
 		
-	for x in CardPoolsUncommon.Tiles:
+	for x in CardPoolsUncommon.GetTiles():
 		unCommonCards.append(x)
 		
-	for x in CardPoolsRare.Tiles:
+	for x in CardPoolsRare.GetTiles():
 		rareCards.append(x)
 	
+	for x in CardPoolsLegendary.GetTiles():
+		legendaryCards.append(x)
+		
 	commonCards.shuffle()
 	unCommonCards.shuffle()
 	rareCards.shuffle()
+	legendaryCards.shuffle()
 	
 	cardPools.append(commonCards)
 	cardPools.append(unCommonCards)
 	cardPools.append(rareCards)
-	
+	cardPools.append(legendaryCards)
 	cardPools = SpawnCard(cardPools, thirdSlotData)	
 	cardPools = SpawnCard(cardPools, secondSlotData)
 	cardPools = SpawnCard(cardPools, firstSlotData)
@@ -69,8 +78,10 @@ func SpawnCard(cardPools, slotChances):
 		pass
 	elif result <= slotChances["common"] + slotChances["uncommon"]:
 		rarity = GameTile.TILE_RARITY.UNCOMMON
-	else:
+	elif result <= slotChances["common"] + slotChances["uncommon"] + slotChances["rare"]:
 		rarity = GameTile.TILE_RARITY.RARE
+	else:
+		rarity = GameTile.TILE_RARITY.LEGENDARY
 		
 	var card = null
 	match rarity:
@@ -83,12 +94,15 @@ func SpawnCard(cardPools, slotChances):
 		GameTile.TILE_RARITY.RARE:
 			card = cardPools[2].pop_front()
 			print("RARE")
+		GameTile.TILE_RARITY.LEGENDARY:
+			card = cardPools[3].pop_front()
 			
-	var instance = card.instantiate()
+	var cardClass = load(card)
+	var instance = cardClass.instantiate()
 	instance.TileType = GameTile.TILE_TYPE.SHOP_TILE
 	$Tiles.add_child(instance)
 	instance.global_position = $TileSpawnPosition.global_position
-	instance.SceneRef = card
+	instance.SceneRef = cardClass
 	var slot = $GridContainer.GetNextOpenPosition()
 	if slot:
 		slot.Occupy(instance)
@@ -121,3 +135,7 @@ func _on_button_button_up() -> void:
 	$CanvasLayer/Button.visible = true
 	
 	
+
+
+func _on_button_2_button_up() -> void:
+	OnTileFinishedResolving(null)

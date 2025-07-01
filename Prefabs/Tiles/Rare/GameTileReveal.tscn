@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_50413"]
 [ext_resource type="Texture2D" uid="uid://mthi3h2b3d6p" path="res://Sprites/Reveal.png" id="2_trcfu"]
-[ext_resource type="Script" uid="uid://xj3x0yg3xw3j" path="res://Scripts/TileEffect/TileEffectReveal.gd" id="3_fo7f5"]
-[ext_resource type="Script" uid="uid://cxme8ni4a2hxu" path="res://Scripts/TileEffect/TileEffectSkipTurn.gd" id="4_lb8hk"]
+[ext_resource type="Script" uid="uid://xj3x0yg3xw3j" path="res://Scripts/TileActiveEffect/TileEffectReveal.gd" id="3_fo7f5"]
+[ext_resource type="Script" uid="uid://cxme8ni4a2hxu" path="res://Scripts/TileActiveEffect/TileEffectSkipTurn.gd" id="4_lb8hk"]
 
 [node name="GameTile" instance=ExtResource("1_50413")]
 TileTitle = "REVEAL"

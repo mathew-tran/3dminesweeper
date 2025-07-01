@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ba05t00ol2um6"]
 
 [ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_pflna"]
-[ext_resource type="Script" uid="uid://c6kolmtilbqdq" path="res://Scripts/TileEffect/TileEffect.gd" id="2_n5g4f"]
+[ext_resource type="Script" uid="uid://c6kolmtilbqdq" path="res://Scripts/TileActiveEffect/TileEffect.gd" id="2_n5g4f"]
 
 [node name="GameTile" instance=ExtResource("1_pflna")]
 TileTitle = "SLASH"

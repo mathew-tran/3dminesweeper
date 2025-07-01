@@ -41,5 +41,6 @@ func DoAction():
 		var effect = Helper.CreateEffectParticle(GetOwningTile().global_position, fieldTile.global_position, 10)
 		await effect.DestinationComplete
 		await fieldTile.PushToGraveyard()
+		Finder.GetGame().OnDiscardTile.emit()
 		await get_tree().create_timer(.2).timeout
 		amount -= 1

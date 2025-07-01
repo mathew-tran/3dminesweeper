@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_ot74e"]
 [ext_resource type="Texture2D" uid="uid://dqbwyhrg6y40" path="res://Sprites/Nothing.png" id="2_i54tn"]
-[ext_resource type="Script" uid="uid://d06vhoqkmpm5c" path="res://Scripts/TileEffect/TileEffectNothing.gd" id="3_kajum"]
+[ext_resource type="Script" uid="uid://d06vhoqkmpm5c" path="res://Scripts/TileActiveEffect/TileEffectNothing.gd" id="3_kajum"]
 
 [node name="GameTile" instance=ExtResource("1_ot74e")]
 TileTitle = "EMPTY"

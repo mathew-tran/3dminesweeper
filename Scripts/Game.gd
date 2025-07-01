@@ -28,6 +28,8 @@ var CurrentState = GAME_STATE.CAN_PLAY_TILES
 
 signal StateUpdate(state)
 signal MoneyUpdate
+signal OnDiscardTile
+
 
 func AddMoney(amount):
 	Money += amount
@@ -59,6 +61,7 @@ func AddTilesIfOpen():
 		return
 	while $Tiles.get_child_count() < TileAmount and Deck.size() > 0:
 		if Deck.size() > 0:
+			SetGameState(GAME_STATE.RESOLVING)
 			await get_tree().process_frame
 			var tile = Deck.pop_front()
 			var instance = tile.instantiate()
@@ -70,7 +73,7 @@ func AddTilesIfOpen():
 			if nextTileSlot: 
 				await nextTileSlot.Occupy(instance)
 				instance.TileFinishedResolving.connect(OnTileFinishedResolving)
-		
+				await instance.FlipIfStartReveal()
 			else:
 				print("No tile slot to fill! This is a big issue!")
 			await get_tree().process_frame
@@ -79,6 +82,8 @@ func AddTilesIfOpen():
 	if Deck.size() <= 0:
 		PutGraveyardBackToDeck()
 		AddTilesIfOpen()
+		
+	SetGameState(GAME_STATE.CAN_PLAY_TILES)
 				
 
 
@@ -159,6 +164,7 @@ func GoBackToGameView():
 	
 func OnMonsterKilled(enemy):
 	
+	Finder.GetInfoPopup().ShowInfo(null)
 	SetGameState(GAME_STATE.SHOP)
 	await get_tree().create_timer(1).timeout
 	await PutTilesBackFromField()
