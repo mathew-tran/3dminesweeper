@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DeckData" load_steps=17 format=3 uid="uid://b4itrbxtgu4o"]
+[gd_resource type="Resource" script_class="DeckData" load_steps=19 format=3 uid="uid://b4itrbxtgu4o"]
 
 [ext_resource type="Script" uid="uid://cy5382418d46q" path="res://Content/DeckData.gd" id="1_k2j4e"]
 [ext_resource type="Script" uid="uid://bduo7injt7042" path="res://Content/CardData.gd" id="1_kg2au"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cqpyomvfvjfbc" path="res://Prefabs/Tiles/Uncommon/GameTileRevealingTruth.tscn" id="6_mu547"]
 [ext_resource type="PackedScene" uid="uid://d117vs6882nq4" path="res://Prefabs/Tiles/Uncommon/GameTileRollingSlash.tscn" id="7_18hkx"]
 [ext_resource type="PackedScene" uid="uid://bcobl3hghsion" path="res://Prefabs/Tiles/Rare/GameTilePinStrike.tscn" id="8_bi8ss"]
+[ext_resource type="PackedScene" uid="uid://biqnd0w5npgn7" path="res://Prefabs/Tiles/Uncommon/GameTileRetreat.tscn" id="9_2kbfe"]
 
 [sub_resource type="Resource" id="Resource_0y4k7"]
 script = ExtResource("1_kg2au")
@@ -52,7 +53,13 @@ Amount = 1
 Path = ExtResource("8_bi8ss")
 metadata/_custom_type_script = "uid://bduo7injt7042"
 
+[sub_resource type="Resource" id="Resource_jotws"]
+script = ExtResource("1_kg2au")
+Amount = 2
+Path = ExtResource("9_2kbfe")
+metadata/_custom_type_script = "uid://bduo7injt7042"
+
 [resource]
 script = ExtResource("1_k2j4e")
-Tiles = Array[ExtResource("1_kg2au")]([SubResource("Resource_0y4k7"), SubResource("Resource_lrcfg"), SubResource("Resource_mu547"), SubResource("Resource_bi8ss"), SubResource("Resource_2kbfe"), SubResource("Resource_lf0ka"), SubResource("Resource_gh088")])
+Tiles = Array[ExtResource("1_kg2au")]([SubResource("Resource_0y4k7"), SubResource("Resource_lrcfg"), SubResource("Resource_mu547"), SubResource("Resource_bi8ss"), SubResource("Resource_2kbfe"), SubResource("Resource_lf0ka"), SubResource("Resource_gh088"), SubResource("Resource_jotws")])
 metadata/_custom_type_script = "uid://cy5382418d46q"

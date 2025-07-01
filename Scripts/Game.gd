@@ -105,6 +105,14 @@ func GetRevealedTiles():
 				revealedTiles.append(tile)
 	return revealedTiles
 	
+func GetFieldTiles():
+	var fieldTiles = []
+	for tile in $Tiles.get_children():
+		if tile.IsFlipped() == false:
+			if tile.is_queued_for_deletion() == false:
+				fieldTiles.append(tile)
+	return fieldTiles
+	
 func PutTilesBackFromField():
 	for tile in $Tiles.get_children():
 		Deck.append(tile.SceneRef)

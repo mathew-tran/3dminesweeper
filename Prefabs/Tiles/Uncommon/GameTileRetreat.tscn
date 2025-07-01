@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://biqnd0w5npgn7"]
+
+[ext_resource type="PackedScene" uid="uid://c0n6a6wl5obia" path="res://Prefabs/GameTile.tscn" id="1_ue2sy"]
+[ext_resource type="Texture2D" uid="uid://2getbkc8kyna" path="res://Sprites/Retreat.png" id="2_ue2sy"]
+[ext_resource type="Script" uid="uid://cj2eopyuatv4k" path="res://Scripts/TileEffect/TileEffectRetreat.gd" id="3_ao1gs"]
+
+[node name="GameTile" instance=ExtResource("1_ue2sy")]
+TileTitle = "RETREAT"
+bStartRevealed = true
+Rarity = 1
+
+[node name="Sprite3D" parent="blockbench_export" index="1"]
+transform = Transform3D(0.037, 0, 0, 0, -1.61732e-09, 0.037, 0, -0.037, -1.61732e-09, 9.24617e-10, 0.0105764, 0)
+texture = ExtResource("2_ue2sy")
+
+[node name="TileEffectRetreat" type="Node2D" parent="Effects" index="0"]
+script = ExtResource("3_ao1gs")
+DiscardAmount = 3
+metadata/_custom_type_script = "uid://cj2eopyuatv4k"
+
+[editable path="blockbench_export"]
