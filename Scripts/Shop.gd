@@ -37,6 +37,9 @@ func _ready() -> void:
 	
 func PopulateTiles():
 	await Cleanup()
+	await get_tree().process_frame
+	while $GridContainer.AreAllChildrenAvailable() == false:
+		await get_tree().create_timer(.1).timeout
 	var cardPools = []
 	var commonCards = []
 	var unCommonCards = []
@@ -76,7 +79,7 @@ func Setup():
 	UpdateReroll()
 	$Camera3D.make_current()
 	
-	PopulateTiles()	
+	await PopulateTiles()	
 
 func SpawnCard(cardPools, slotChances):
 	var rarity = GameTile.TILE_RARITY.COMMON
@@ -122,13 +125,9 @@ func OnTileFinishedResolving(_tileScene):
 	
 	
 func Cleanup():
-	await get_tree().process_frame
 	for x in $Tiles.get_children():
-		var tween = get_tree().create_tween()
-		tween.tween_property(x, "scale", Vector3.ZERO, .1)
-		await tween.finished
 		x.queue_free()
-
+	
 func UpdateReroll():
 	RerollButton.SetRerollAmount(RerollAmount)
 	RerollButton.Update(RerollAmount)

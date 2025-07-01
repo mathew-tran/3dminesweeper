@@ -12,7 +12,7 @@ signal GraveyardUpdate
 var Deck = []
 var Graveyard = []
 var Skips = 0
-var Money = 10
+var Money = 5
 
 var LivingTiles = []
 
@@ -85,7 +85,6 @@ func AddTilesIfOpen(delay = -1.0, maxDrawAmount = -1):
 		if Deck.size() <= 0:
 			await PutGraveyardBackToDeck()
 		if Deck.size() > 0:
-			SetGameState(GAME_STATE.RESOLVING)
 			await get_tree().process_frame
 			var tile = Deck.pop_front()
 			var instance = tile.instantiate()
@@ -181,10 +180,17 @@ func _ready() -> void:
 	$Spawner.MonsterKilled.connect(OnMonsterKilled)
 	DeckUpdate.emit()
 	GraveyardUpdate.emit()
+	StateUpdate.connect(OnStateUpdate)
 	await AddTilesIfOpen(.5, 0)
 	SetGameState(GAME_STATE.CAN_PLAY_TILES)
 	#OnMonsterKilled(Finder.GetEnemy())
 
+func OnStateUpdate(state : GAME_STATE):
+	if state == GAME_STATE.CAN_PLAY_TILES:
+		var mouseEvent = InputEventMouseMotion.new()
+		mouseEvent.position = get_viewport().get_mouse_position()
+		Input.parse_input_event(mouseEvent)
+	
 func OnMoneyUpdate():
 	$CanvasLayer/MoneyUI.Update(Money)
 	

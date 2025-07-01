@@ -14,11 +14,18 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		StartPosition = global_position
 		Update()
+		
 func GetPositions():
 	var positions = []
 	for child in get_children():
 		positions.append(child.global_position)
 	return positions
+	
+func AreAllChildrenAvailable():
+	for child in get_children():
+		if child.IsAvailable() == false:
+			return false
+	return true
 	
 func GetNextOpenPosition():
 	for child in get_children():

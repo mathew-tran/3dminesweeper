@@ -89,7 +89,7 @@ func _ready() -> void:
 		TILE_RARITY.LEGENDARY:
 			rarityMaterial = load("res://Materials/MATERIAL_LEGENDARY.tres")
 	$blockbench_export/Node/cuboid/CSGMesh3D.material = rarityMaterial
-	
+
 	
 		
 func FlipIfStartReveal():
@@ -149,7 +149,9 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 			await tween.finished
 			Finder.GetGame().AddTileScene(SceneRef)
 			await PushToGraveyard()
-		
+	
+func _process(delta: float) -> void:
+	pass
 
 func PlaySFX():
 	$blockbench_export/Node/cuboid/GPUParticles3D.emitting = true
@@ -160,7 +162,6 @@ func DoEffect():
 	var speed = .1
 	
 	var tween = get_tree().create_tween()
-	tween = get_tree().create_tween()
 	tween.tween_property(self, "global_position", global_position - Vector3(0,0,.01), .2)
 	tween.tween_property(self, "rotation_degrees", rotation_degrees + Vector3(90,0,0), speed)
 	tween.tween_property(self, "global_position", OriginalPosition + Vector3(0,.05,0), .1)
