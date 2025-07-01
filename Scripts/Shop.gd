@@ -33,7 +33,8 @@ var RerollAmount = 3
 var DefaultRerollAmount = 3
 
 func _ready() -> void:
-	Setup()
+	$CanvasLayer.visible = false
+	
 func PopulateTiles():
 	await Cleanup()
 	var cardPools = []

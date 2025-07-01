@@ -207,7 +207,7 @@ func _on_mouse_entered() -> void:
 	if CurrentState != TILE_STATE.UNCLICKABLE:
 		$blockbench_export/Node/cuboid.material_override = load("res://Shaders/GameTileHighlight.tres")
 	if TileType == TILE_TYPE.SHOP_TILE or TileVisibility == TILE_VISIBILITY.REVEALED:
-		ShowTileInfo()
+		ShowTileInfo(true)
 
 
 func ShowHiddenTileInfo():
@@ -216,11 +216,13 @@ func ShowHiddenTileInfo():
 	data["title"] = "???"
 	Finder.GetInfoPopup().ShowInfo(data)
 
-func ShowTileInfo():
+func ShowTileInfo(bPlayerPrompted = false):
 		var data = {}
 		data["desc"] = GetDescription()
 		data["title"] = GetTitle()
 		data["img"] = $blockbench_export/Sprite3D.texture
+		if bPlayerPrompted:
+			data["player"] = true
 		Finder.GetInfoPopup().ShowInfo(data)
 
 func _on_mouse_exited() -> void:
