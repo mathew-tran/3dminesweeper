@@ -4,13 +4,35 @@ class_name TileEffectRetreat
 
 @export var DiscardAmount = 2
 
+enum TILE_TYPE {
+	REVEALED,
+	HIDDEN,
+	ANY
+}
+
+@export var TileType : TILE_TYPE
 func GetDescription():
-	return "Discard upto " + str(DiscardAmount)  + " random tiles on field"
+	var string = "Discard upto " + str(DiscardAmount)  + " random"
+	match TileType:
+		TILE_TYPE.REVEALED:
+			string += " revealed"
+		TILE_TYPE.HIDDEN:
+			string += " hidden"
+			
+	string += " tiles"
+	return string
 	
 func DoAction():
 	var amount = DiscardAmount
 	while amount > 0:
-		var fieldTiles = Finder.GetGame().GetFieldTiles()
+		var fieldTiles = []
+		match TileType:
+			TILE_TYPE.REVEALED:
+				fieldTiles = Finder.GetGame().GetRevealedTiles()
+			TILE_TYPE.HIDDEN:
+				fieldTiles = Finder.GetGame().GetNonRevealedTiles()
+			TILE_TYPE.ANY:
+				fieldTiles = Finder.GetGame().GetFieldTiles()
 		if fieldTiles.size() == 0:
 			return
 		fieldTiles.shuffle()
