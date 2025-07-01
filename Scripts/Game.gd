@@ -187,8 +187,14 @@ func _ready() -> void:
 
 func OnStateUpdate(state : GAME_STATE):
 	if state == GAME_STATE.CAN_PLAY_TILES:
+		var oldPosition = get_viewport().get_mouse_position()
 		var mouseEvent = InputEventMouseMotion.new()
-		mouseEvent.position = get_viewport().get_mouse_position()
+		mouseEvent.position = Vector2.ZERO
+		mouseEvent.screen_velocity = Vector2(100,100)
+		Input.parse_input_event(mouseEvent)
+		#mouseEvent.position = oldPosition
+		await get_tree().process_frame
+		mouseEvent.position = oldPosition
 		Input.parse_input_event(mouseEvent)
 	
 func OnMoneyUpdate():
