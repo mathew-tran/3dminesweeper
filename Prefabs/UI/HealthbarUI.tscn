@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://uhrdfbyk2mik"]
+[gd_scene load_steps=8 format=3 uid="uid://uhrdfbyk2mik"]
 
 [ext_resource type="Script" uid="uid://di6sf5b4wfppn" path="res://Scripts/UI/HealthbarUI.gd" id="1_dxg7q"]
+[ext_resource type="FontFile" uid="uid://divkrdi6k24pj" path="res://Fonts/Saira/static/Saira_Expanded-Bold.ttf" id="2_rbs7m"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sat24"]
 bg_color = Color(0.154876, 0.154876, 0.154876, 1)
@@ -61,8 +62,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 100.0
+offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("2_rbs7m")
+theme_override_font_sizes/font_size = 40
 text = "100/100"
 horizontal_alignment = 1
 vertical_alignment = 1

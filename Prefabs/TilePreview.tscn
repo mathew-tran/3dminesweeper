@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c57vx16ukfuxw"]
+[gd_scene load_steps=4 format=3 uid="uid://c57vx16ukfuxw"]
 
 [ext_resource type="Script" uid="uid://bhgb5lvjoeg3x" path="res://Scripts/TilePreview.gd" id="1_iy5le"]
 [ext_resource type="PackedScene" uid="uid://d0f4rrupdu72k" path="res://Models/Tile/tile.gltf" id="1_jsjpc"]
+[ext_resource type="FontFile" uid="uid://divkrdi6k24pj" path="res://Fonts/Saira/static/Saira_Expanded-Bold.ttf" id="3_ich46"]
 
 [node name="TilePreview" type="Node3D" groups=["TilePreview"]]
 script = ExtResource("1_iy5le")
@@ -12,7 +13,9 @@ metadata/_edit_group_ = true
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, 0.2, 0, -0.2, -8.74228e-09, 0, 0.00782856, 0)
 text = "3"
+font = ExtResource("3_ich46")
 
 [node name="Label3D2" type="Label3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, 0.2, 0, -0.2, -8.74228e-09, 0, 0.00782856, 0.0555201)
 text = "Deck"
+font = ExtResource("3_ich46")

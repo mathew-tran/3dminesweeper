@@ -113,9 +113,11 @@ func UpdateReroll():
 func _on_button_button_up() -> void:
 	$CanvasLayer/Button.release_focus()
 	$CanvasLayer/Button.disabled = false
+	$CanvasLayer/Button.visible = false
 	Finder.GetGame().RemoveMoney(RerollAmount)
 	await PopulateTiles()
 	RerollAmount += 2
 	UpdateReroll()
+	$CanvasLayer/Button.visible = true
 	
 	

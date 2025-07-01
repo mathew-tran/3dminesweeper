@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgf56ndysg1x1"]
+[gd_scene load_steps=4 format=3 uid="uid://dgf56ndysg1x1"]
 
 [ext_resource type="Texture2D" uid="uid://boemx0q5re6qc" path="res://Sprites/Money.png" id="1_k4her"]
 [ext_resource type="Script" uid="uid://bpf5lwks3gp4b" path="res://Scripts/UI/MoneyUI.gd" id="1_xokbh"]
+[ext_resource type="FontFile" uid="uid://divkrdi6k24pj" path="res://Fonts/Saira/static/Saira_Expanded-Bold.ttf" id="3_61qg5"]
 
 [node name="MoneyUI" type="HBoxContainer"]
 offset_left = 11.0
@@ -18,5 +19,6 @@ texture = ExtResource("1_k4her")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_61qg5")
 theme_override_font_sizes/font_size = 50
 text = "10"

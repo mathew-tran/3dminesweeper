@@ -182,6 +182,7 @@ func ShowTileInfo():
 		var data = {}
 		data["desc"] = GetDescription()
 		data["title"] = GetTitle()
+		data["img"] = $blockbench_export/Sprite3D.texture
 		Finder.GetInfoPopup().ShowInfo(data)
 
 func _on_mouse_exited() -> void:

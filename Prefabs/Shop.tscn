@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2ll27us1m10f"]
+[gd_scene load_steps=10 format=3 uid="uid://b2ll27us1m10f"]
 
 [ext_resource type="Script" uid="uid://dokd7dv47iv73" path="res://Scripts/Shop.gd" id="1_pu482"]
 [ext_resource type="PackedScene" uid="uid://dn3eh371dddi7" path="res://Models/Shop/Shop.gltf" id="1_wubrc"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://du17xcctl366x" path="res://Content/CardPools/CardPoolData_Uncommon.tres" id="3_cetby"]
 [ext_resource type="Resource" uid="uid://vta4ddbs5m7v" path="res://Content/CardPools/CardPoolData_Rare.tres" id="4_bgph2"]
 [ext_resource type="PackedScene" uid="uid://dgf56ndysg1x1" path="res://Prefabs/UI/MoneyUI.tscn" id="8_bgph2"]
+[ext_resource type="FontFile" uid="uid://divkrdi6k24pj" path="res://Fonts/Saira/static/Saira_Expanded-Bold.ttf" id="8_vgb8g"]
 
 [node name="Shop" type="Node3D"]
 script = ExtResource("1_pu482")
@@ -41,6 +42,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.3
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, 0.2, 0, -0.2, -8.74228e-09, 0.00668335, 0.155548, -0.120807)
 text = "Pick a tile"
+font = ExtResource("8_vgb8g")
 
 [node name="TileSpawnPosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.531303)
@@ -64,6 +66,8 @@ grow_vertical = 0
 layout_mode = 0
 offset_right = 517.0
 offset_bottom = 73.0
+theme_override_fonts/font = ExtResource("8_vgb8g")
+theme_override_font_sizes/font_size = 30
 text = "REROLL"
 horizontal_alignment = 1
 vertical_alignment = 1
